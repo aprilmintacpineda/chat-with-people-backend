@@ -89,7 +89,11 @@ Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look
 };
 ```
 
-#### 1.5 Run it
+#### 1.5 Compile JavaScript and SASS
+
+To build for dev mode `npm run webpack`. To build for production mode, which is minified and uglified, `npm run webpack:production`.
+
+#### 1.6 Run it
 
 To run in dev mode `npm run start`. To run in production mode `npm run start:production`.
 
