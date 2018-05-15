@@ -92,3 +92,5 @@ Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look
 #### 1.5 Run it
 
 To run in dev mode `npm run start`. To run in production mode `npm run start:production`.
+
+Now you can access the web interface via `localhost:3000`.
