@@ -36,19 +36,19 @@ git clone git@github.com:aprilmintacpineda/chat-with-people-backend.git
 cd chat-with-people-backend
 ```
 
-###### 1.1 Install all dependencies
+#### 1.1 Install all dependencies
 
 ```
 npm i
 ```
 
-###### 1.2 Set up configuration files
+#### 1.2 Set up configuration files
 
 ```
 npm run config:init
 ```
 
-###### 1.3 Configure database
+#### 1.3 Configure database
 
 Edit `src/config/sequelize.json`. It should look something like this:
 
@@ -71,11 +71,11 @@ npm run db:init
 npm run db:install
 ```
 
-###### 1.3 Notes
+#### 1.3 Notes
 
 - If you are going to run production mode, you need to edit the `production` key as well.
 
-###### 1.4 Configure email
+#### 1.4 Configure email
 
 Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look something like this
 
@@ -89,6 +89,6 @@ Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look
 };
 ```
 
-###### 1.5 Run it
+#### 1.5 Run it
 
 To run in dev mode `npm run start`. To run in production mode `npm run start:production`.
