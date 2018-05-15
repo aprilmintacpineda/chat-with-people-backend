@@ -2,7 +2,7 @@ import express from 'express';
 import expressJWT from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jsrsasign from 'jsrsasign';
-import graphqlSchema from './graphQLSchema';
+import graphqlSchema from './graphql/schema';
 
 const app = express();
 const webDir = __dirname + '/web';
