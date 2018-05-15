@@ -4,6 +4,7 @@
     "transform-class-properties"
   ],
   "presets": [
-    "env"
+    "env",
+    "react"
   ]
 }
