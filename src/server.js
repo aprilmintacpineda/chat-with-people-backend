@@ -14,7 +14,7 @@ const pathsWithNoJWT = [
 ];
 
 app.use('/public', express.static(publicDir));
-app.use('/api', expressGraphQL({
+app.use('/api', expressJWT({ secret }).unless({ path: pathsWithNoJWT }), expressGraphQL({
   schema: graphqlSchema,
   graphiql: true
 }));
