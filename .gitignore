@@ -1,3 +1,13 @@
+# OSX
+.DS_Store
+
+# configurations
+src/config
+src/models/index.js
+
+# source build
+build/
+
 # Logs
 logs
 *.log
