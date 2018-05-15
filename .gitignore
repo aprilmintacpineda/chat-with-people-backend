@@ -8,6 +8,9 @@ src/models/index.js
 # source build
 build/
 
+# resources builds
+src/public/app.*
+
 # Logs
 logs
 *.log
