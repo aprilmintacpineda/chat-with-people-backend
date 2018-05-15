@@ -4,7 +4,6 @@
   "description": "Backend codes for the project ChatWithPeople",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.18.0",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "express-jwt": "^5.3.1",
@@ -48,6 +47,10 @@
     "webpack": "^3.12.0"
   },
   "scripts": {
+    "db:remove": "babel-node node_modules/.bin/sequelize db:drop",
+    "db:init": "babel-node node_modules/.bin/sequelize init",
+    "db:install": "babel-node node_modules/.bin/sequelize db:create && babel-node node_modules/.bin/sequelize db:migrate",
+    "db:migration:create": "babel-node node_modules/.bin/sequelize migration:generate",
     "reinstallNodeModules": "rm -rf node_modules && npm install",
     "test": "jest",
     "config:nodemailer": "cp configs/nodemailer.example.js src/config/nodemailer.js",
