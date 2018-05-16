@@ -1,1 +1,6 @@
-console.log('hello world!');
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import Main from './Main';
+
+render(<Main />, document.querySelector('#app'));
