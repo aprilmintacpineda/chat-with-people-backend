@@ -13,8 +13,9 @@ class Button extends React.Component {
     const errors = this.props.errors && this.props.errors.length? <Errors errors={this.props.errors} /> : null;
 
     return (
-      <div className="">
+      <div className="input-button">
         <input
+          className={this.props.type}
           type="button"
           value={this.props.text}
           onClick={this.handleClick}
@@ -27,12 +28,14 @@ class Button extends React.Component {
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
+  type: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.string),
   onClick: PropTypes.func.isRequired,
   loading: PropTypes.bool
 };
 
 Button.defaultProps = {
+  type: 'primary',
   text: 'Button',
   errors: null,
   onClick: null,

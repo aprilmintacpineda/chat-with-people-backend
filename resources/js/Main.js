@@ -8,6 +8,17 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './redux/reducers';
 import createReduxSagaMiddleware from 'redux-saga';
 import rootSaga from './redux/sagas';
+import axios from 'axios';
+
+axios.interceptors.request.use(config => {
+  return {
+    ...config,
+    headers: {
+      ...config.headers,
+      'Content-Type': 'application/graphql'
+    }
+  };
+});
 
 const reduxSagaMiddleware = createReduxSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(

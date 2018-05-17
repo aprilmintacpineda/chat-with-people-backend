@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import testSaga from './testSaga';
+import register from './register';
 
 export default function* () {
   yield all([
-    testSaga()
+    register()
   ]);
 }

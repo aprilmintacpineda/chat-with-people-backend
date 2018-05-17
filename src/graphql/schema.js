@@ -7,36 +7,76 @@ import {
   GraphQLNonNull
 } from 'graphql';
 
-const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+const users = [
+  {
+    user_id: 'axsdaew',
+    fullname: 'April Mintac Pineda',
+    sex: 'Male',
+    username: 'aprilmintacpineda'
+  },
+  {
+    user_id: 'zxczxvxcv',
+    fullname: 'Katherine Manalo Singson',
+    sex: 'Female',
+    username: 'kathysingson'
+  },
+  {
+    user_id: 'qweqweqwe',
+    fullname: 'Cyrine Julianne Manalo Singson',
+    sex: 'Female',
+    username: 'cjsingson'
+  }
+];
+
+const userType = new GraphQLObjectType({
+  name: 'userType',
   fields: {
-    user: {
-      type: new GraphQLObjectType({
-        name: 'User',
-        fields: {
-          id: { type: GraphQLString },
-          name: { type: GraphQLString },
-          gender: { type: GraphQLString },
-          email: { type: GraphQLString }
-        }
-      }),
+    user_id: { type: GraphQLString },
+    fullname: { type: GraphQLString },
+    sex: { type: GraphQLString },
+    username: { type: GraphQLString }
+  }
+});
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    registerUser: {
+      type: userType,
       args: {
-        id: { type: GraphQLString }
+        fullname: { type: GraphQLString },
+        sex: { type: GraphQLString },
+        username: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+        repassword: { type: GraphQLString }
       },
       resolve (parentValue, args) {
-        console.log(args);
+        console.log(parentValue, args);
+      }
+    }
+  }
+});
 
-        return {
-          id: 'abc',
-          name: 'April Mintac Pineda',
-          gender: 'Male',
-          email: 'april@pineda.com'
-        };
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQuery',
+  fields: {
+    searchUsers: {
+      type: new GraphQLList(userType),
+      args: {
+        fullname: { type: GraphQLString },
+        username: { type: GraphQLString }
+      },
+      resolve (parentValue, args) {
+        // console.log(parentValue, args);
+
+        return users;
       }
     }
   }
 });
 
 export default new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });

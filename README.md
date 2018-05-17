@@ -1,10 +1,10 @@
 # UNDER DEVELOPMENT
 
-This project was part of my studies about JWT and GraphQL.
+Trello board: https://trello.com/b/XoVn7s2F
 
 # chat-with-people-backend
 
-Backend codes for the project ChatWithPeople web application.
+Backend codes for the project ChatWithPeople web application. This project was part of my studies about JWT and GraphQL.
 
 # What it does
 

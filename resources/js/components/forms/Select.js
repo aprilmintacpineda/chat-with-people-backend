@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import validator from 'smart-input-validator';
 import Errors from './Errors';
 
-class InputText extends React.Component {
+class Select extends React.Component {
   handleChange = changeEvent => {
     if (!this.props.disabled) {
       let errors = [];
@@ -29,39 +29,36 @@ class InputText extends React.Component {
     const errors = this.props.errors && this.props.errors.length? <Errors errors={this.props.errors} /> : null;
 
     return (
-      <div className="input-text">
-        <input
-          placeholder={this.props.placeholder}
-          type={this.props.secured? 'password' : 'text'}
-          value={this.props.value}
-          onChange={this.handleChange}
-        />
+      <div className="input-select">
+        <select onChange={this.handleChange} value={this.props.value}>
+          {
+            this.props.options.map((opt, i) =>
+              <option key={i}>{opt}</option>
+            )
+          }
+        </select>
         {errors}
       </div>
     );
   }
 }
 
-InputText.propTypes = {
-  placeholder: PropTypes.string,
+Select.propTypes = {
   value: PropTypes.string.isRequired,
-  errors: PropTypes.arrayOf(PropTypes.string),
-  secured: PropTypes.bool,
-  validationRules: PropTypes.string,
-  validationMessages: PropTypes.objectOf(PropTypes.string),
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  validationRules: PropTypes.string,
+  valdiationMessages: PropTypes.objectOf(PropTypes.string),
+  errors: PropTypes.arrayOf(PropTypes.string)
 };
 
-InputText.defaultProps = {
-  placeholder: '...',
+Select.defaultProps = {
   value: '',
   onChange: null,
-  errors: null,
-  secured: false,
+  disabled: false,
   validationRules: null,
-  validationMessages: {},
-  disabled: false
+  valdiationMessages: {},
+  errors: null
 };
 
-export default InputText;
+export default Select;
