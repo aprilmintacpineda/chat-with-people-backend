@@ -13,6 +13,7 @@ const pathsWithNoJWT = [
 ];
 
 app.use('/public', express.static(publicDir));
+app.use('/webfonts', express.static(publicDir + '/webfonts'));
 app.use('/api', expressJWT({ secret }).unless({ path: pathsWithNoJWT }), expressGraphQL({
   schema: graphqlSchema,
   graphiql: true
