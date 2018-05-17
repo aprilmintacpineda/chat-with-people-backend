@@ -16,7 +16,10 @@ app.use('/public', express.static(publicDir));
 app.use('/webfonts', express.static(publicDir + '/webfonts'));
 app.use('/api', expressJWT({ secret }).unless({ path: pathsWithNoJWT }), expressGraphQL({
   schema: graphqlSchema,
-  graphiql: true
+  graphiql: true,
+  formatError (err) {
+    return err.message;
+  }
 }));
 app.use('*', (request, response) => {
   response.sendFile(publicDir + '/index.html');

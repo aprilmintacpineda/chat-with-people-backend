@@ -10,13 +10,19 @@ export function formSubmit (state, action) {
 }
 
 export function formSubmitted (state, action) {
-  if (action.payload.shouldClearState) {
+  if (action.payload && action.payload.success) {
     return {
       ...initialState
     };
   }
 
-  return {
+  return action.payload && action.payload.fields ? {
+    ...state,
+    ...action.payload.fields,
+    request: {
+      pending: false
+    }
+  } : {
     ...state,
     request: {
       pending: false

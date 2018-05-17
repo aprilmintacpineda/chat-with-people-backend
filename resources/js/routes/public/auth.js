@@ -1,13 +1,23 @@
+import React from 'react';
 import Login from '../../screens/Login';
 import Register from '../../screens/Register';
+import Wrappers from '../../components/Wrappers';
 
 export default [
   {
     path: '/auth/login',
-    component: Login
+    component: props => (
+      <Wrappers {...props}>
+        <Login {...props} />
+      </Wrappers>
+    )
   },
   {
     path: '/auth/register',
-    component: Register
+    component: props => (
+      <Wrappers {...props}>
+        <Register {...props} />
+      </Wrappers>
+    )
   }
 ];

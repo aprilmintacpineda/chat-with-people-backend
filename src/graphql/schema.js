@@ -1,11 +1,11 @@
 import {
   GraphQLSchema,
   GraphQLString,
-  GraphQLInt,
   GraphQLObjectType,
-  GraphQLList,
-  GraphQLNonNull
+  GraphQLList
 } from 'graphql';
+import registerUser from './registerUser';
+import userType from './types/user';
 
 const users = [
   {
@@ -28,33 +28,10 @@ const users = [
   }
 ];
 
-const userType = new GraphQLObjectType({
-  name: 'userType',
-  fields: {
-    user_id: { type: GraphQLString },
-    fullname: { type: GraphQLString },
-    sex: { type: GraphQLString },
-    username: { type: GraphQLString }
-  }
-});
-
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    registerUser: {
-      type: userType,
-      args: {
-        fullname: { type: GraphQLString },
-        sex: { type: GraphQLString },
-        username: { type: GraphQLString },
-        email: { type: GraphQLString },
-        password: { type: GraphQLString },
-        repassword: { type: GraphQLString }
-      },
-      resolve (parentValue, args) {
-        console.log(parentValue, args);
-      }
-    }
+    registerUser
   }
 });
 

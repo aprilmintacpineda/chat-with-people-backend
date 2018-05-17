@@ -1,6 +1,9 @@
 import { call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { getRegisterRequestState, getRegisterFields } from './selectors';
+import registerActions from '../../reducers/register/actions';
+import msgBoxActions from '../../reducers/messageBox/actions';
+import redirectActions from '../../reducers/redirect/actions';
 
 export default function* (payload) {
   const registerRequestState = yield select(getRegisterRequestState);
@@ -8,17 +11,6 @@ export default function* (payload) {
   if (!registerRequestState.pending) {
     try {
       const registerFields = yield select(getRegisterFields);
-
-      console.log(`
-      mutation {
-        registerUser (${registerFields}) {
-          user_id,
-          username,
-          fullname,
-          sex
-        }
-      }
-    `);
 
       const { data } = yield call(axios.post, '/api/login', `
         mutation {
@@ -30,8 +22,36 @@ export default function* (payload) {
           }
         }
       `);
+
+      if (data.errors) {
+        yield put(registerActions.formSubmitted({
+          payload: {
+            fields: JSON.parse(data.errors)
+          }
+        }));
+        return;
+      }
+
+      yield put(redirectActions.go({
+        payload: {
+          to: '/auth/login'
+        }
+      }));
+
+      yield put(msgBoxActions.dialogue({
+        payload: 'Your account has been created. Please confirm your email address by following the instructions we sent to your inbox.'
+      }));
+
+      yield put(registerActions.formSubmitted({
+        payload: {
+          success: true
+        }
+      }));
     } catch (e) {
-      console.log(e);
+      yield put(registerActions.formSubmitted());
+      yield put(msgBoxActions.dialogue({
+        payload: 'An unexpected error occured. Please try again.'
+      }));
     }
   }
 }

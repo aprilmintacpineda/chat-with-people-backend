@@ -35,7 +35,12 @@ export default class App extends React.Component {
           <Switch>
             {
               routes.map((route, i) =>
-                <Route key={i} exact={route.exact || false} path={route.path} component={route.component} />
+                <Route
+                  key={i}
+                  exact={route.exact || false}
+                  path={route.path}
+                  component={route.component}
+                />
               )
             }
             <Route component={E404} />

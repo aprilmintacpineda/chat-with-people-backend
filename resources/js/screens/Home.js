@@ -1,10 +1,8 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import testActions from '../redux/reducers/testReducer/actions';
 import AuthButtons from './partials/AuthButtons';
 
-class Home extends React.Component {
+export default class Home extends React.Component {
   constructor (props) {
     super(props);
 
@@ -56,76 +54,40 @@ class Home extends React.Component {
     switch (this.state.page) {
       case 1:
         contents = (
-          <CSSTransition
-            in={this.state.showContents}
-            timeout={300}
-            unmountOnExit
-            classNames="slide-left"
-          >
-            <div className="title-container">
-              <p className="fab fa-rocketchat icon" />
-              <p className="title">Chat with People</p>
-              <p className="small-desc">Hobby project of April Mintac Pineda</p>
-            </div>
-          </CSSTransition>
+          <div key={1} className="title-container animate-slide-left">
+            <p className="fab fa-rocketchat icon" />
+            <p className="title">Chat with People</p>
+            <p className="small-desc">Hobby project of April Mintac Pineda</p>
+          </div>
         );
       break;
       case 2:
         contents = (
-          <CSSTransition
-            in={this.state.showContents}
-            timeout={300}
-            unmountOnExit
-            classNames="slide-left"
-          >
-            <div className="title-container">
-              <p className="fas fa-comments icon" />
-              <p className="title">We can use it!</p>
-              <p className="small-desc">Chat with anyone, anywhere, realtime.</p>
-            </div>
-          </CSSTransition>
+          <div key={2} className="title-container animate-slide-left">
+            <p className="fas fa-comments icon" />
+            <p className="title">We can use it!</p>
+            <p className="small-desc">Chat with anyone, anywhere, realtime.</p>
+          </div>
         );
       break;
       case 3:
         contents = (
-          <CSSTransition
-            in={this.state.showContents}
-            timeout={300}
-            unmountOnExit
-            classNames="slide-left"
-          >
-            <div className="title-container">
-              <p className="fas fa-user-lock icon" />
-              <p className="title">Safe, secured, and free!</p>
-              <p className="small-desc">Rest assured that you're data is safe, even when you're offline.</p>
-            </div>
-          </CSSTransition>
+          <div key={3} className="title-container animate-slide-left">
+            <p className="fas fa-user-lock icon" />
+            <p className="title">Safe, secured, and free!</p>
+            <p className="small-desc">Rest assured that you're data is safe, even when you're offline.</p>
+          </div>
         );
       break;
     }
 
     return (
       <div className="home-body body-wrapper">
-        <CSSTransition
-          in={this.state.showButtons}
-          timeout={300}
-          unmountOnExit
-          classNames="fade"
-        >
-          <div>
-            <span className="fas fa-chevron-right next next-prev-btns" onClick={this.nextPage} />
-            <span className="fas fa-chevron-left prev next-prev-btns" onClick={this.prevPage} />
-          </div>
-        </CSSTransition>
+        <span className="fas fa-chevron-right next next-prev-btns animate-shoot-down" onClick={this.nextPage} />
+        <span className="fas fa-chevron-left prev next-prev-btns animate-shoot-down" onClick={this.prevPage} />
         <AuthButtons />
         {contents}
       </div>
     );
   }
 }
-
-export default connect(store => ({
-  testState: { ...store.testReducer }
-}), {
-  ...testActions
-})(Home);
