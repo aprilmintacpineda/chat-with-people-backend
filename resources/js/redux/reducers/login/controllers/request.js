@@ -10,7 +10,7 @@ export function formSubmit (state) {
 }
 
 export function formSubmitted (state, action) {
-  if (action.payload && action.payload.success) return { ...initialState };
+  if (action.payload.success) return { ...initialState };
 
   return action.payload && action.payload.fields ? {
     ...state,

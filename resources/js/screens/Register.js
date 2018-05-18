@@ -20,9 +20,7 @@ class Register extends React.Component {
   }
 
   render () {
-    if (this.props.registerState.request.pending) {
-      return <BlockLoading />;
-    }
+    if (this.props.registerState.request.pending) return <BlockLoading />;
 
     return (
       <div className="register">
