@@ -14,6 +14,10 @@ export default class Home extends React.Component {
     };
   }
 
+  componentWillUnmount () {
+    this.clearAutoNavigate(true);
+  }
+
   componentDidMount () {
     setTimeout(() => {
       this.setState({
@@ -30,19 +34,16 @@ export default class Home extends React.Component {
   }
 
   autoNavigate = () => {
-    return setInterval(() => this.setState({
-      ...this.state,
-      page: this.state.page + 1
-    }), 1000);
+    return setInterval(() => this.nextPage(), 3000);
   }
 
-  clearAutoNavigate = () => {
+  clearAutoNavigate = should => {
     clearInterval(this.state.interval);
 
     return setTimeout(() => this.setState({
       ...this.state,
       interval: this.autoNavigate()
-    }), 1000);
+    }), 3000);
   }
 
   nextPage = () => {

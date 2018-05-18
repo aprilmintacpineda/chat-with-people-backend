@@ -11,5 +11,5 @@ export default {
     body: Sequelize.STRING(255),
     created_at: Sequelize.BIGINT(20)
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('conversation_notification')
+  down: queryInterface => queryInterface.dropTable('conversation_notification')
 };

@@ -9,5 +9,5 @@ export default {
     created_at: Sequelize.BIGINT(20),
     seen_at: Sequelize.BIGINT(20)
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('user_notification')
+  down: queryInterface => queryInterface.dropTable('user_notification')
 };

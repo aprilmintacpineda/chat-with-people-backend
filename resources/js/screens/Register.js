@@ -9,6 +9,16 @@ import BlockLoading from '../components/BlockLoading';
 import registerActions from '../redux/reducers/register/actions';
 
 class Register extends React.Component {
+  componentDidMount () {
+    if (this.props.match.params.confirm_token) {
+      return this.props.verifyEmail({
+        payload: {
+          confirm_token: this.props.match.params.confirm_token
+        }
+      });
+    }
+  }
+
   render () {
     if (this.props.registerState.request.pending) {
       return <BlockLoading />;
@@ -148,7 +158,8 @@ Register.propTypes = {
   editEmail: PropTypes.func.isRequired,
   editPassword: PropTypes.func.isRequired,
   editRepassword: PropTypes.func.isRequired,
-  formSubmit: PropTypes.func.isRequired
+  formSubmit: PropTypes.func.isRequired,
+  verifyEmail: PropTypes.func.isRequired
 };
 
 export default connect(store => ({

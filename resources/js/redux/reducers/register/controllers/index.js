@@ -17,5 +17,6 @@ export default {
   [actionTypes.editPassword]: editPassword,
   [actionTypes.editRepassword]: editRepassword,
   [actionTypes.formSubmit]: formSubmit,
-  [actionTypes.formSubmitted]: formSubmitted
+  [actionTypes.formSubmitted]: formSubmitted,
+  [actionTypes.verifyEmail]: formSubmit
 };

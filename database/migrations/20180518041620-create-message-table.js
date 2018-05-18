@@ -8,5 +8,5 @@ export default {
     body: Sequelize.TEXT,
     created_at: Sequelize.BIGINT(20)
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('message')
+  down: queryInterface => queryInterface.dropTable('message')
 };

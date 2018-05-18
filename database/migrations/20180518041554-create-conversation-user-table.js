@@ -17,5 +17,5 @@ export default {
       allowNull: true
     }
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('conversation_user')
+  down: queryInterface => queryInterface.dropTable('conversation_user')
 };

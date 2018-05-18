@@ -88,17 +88,21 @@ After you have set that up, you can create the database and run the migration by
 
 #### 1.4 Configure email
 
-Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look something like this
+Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look something like this:
 
 ```
 {
-  user: 'inbox-username',
-  pass: 'inbox-password',
   host: 'smtp.mailtrap.io',
   port: 2525,
-  secure: false // true for 465, false for other ports
-};
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'your-username',
+    pass: 'your-password'
+  }
+}
 ```
+
+For more details, please checkout [nodemailer's documentation](https://nodemailer.com/smtp/).
 
 #### 1.5 Compile JavaScript and SASS
 

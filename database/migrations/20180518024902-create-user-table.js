@@ -15,8 +15,9 @@ export default {
     password: Sequelize.STRING(255),
     fullname: Sequelize.STRING(70),
     sex: Sequelize.STRING(6),
+    confirm_token: Sequelize.STRING(20),
     created_at: Sequelize.BIGINT(20),
-    verified_at: {
+    confirmed_at: {
       type: Sequelize.BIGINT(20),
       allowNull: true
     },
@@ -25,5 +26,5 @@ export default {
       allowNull: true
     }
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('user')
+  down: queryInterface => queryInterface.dropTable('user')
 };

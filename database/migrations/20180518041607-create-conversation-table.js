@@ -7,5 +7,5 @@ export default {
     name: Sequelize.STRING(20),
     created_at: Sequelize.BIGINT(20)
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('conversation')
+  down: queryInterface => queryInterface.dropTable('conversation')
 };

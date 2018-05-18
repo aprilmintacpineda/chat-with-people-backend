@@ -1,33 +1,24 @@
 import { call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
-import { getRegisterRequestState, getRegisterFields } from './selectors';
+import { getRegisterRequestState } from '../register/selectors';
 import registerActions from '../../reducers/register/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
 
-export default function* () {
+export default function* (action) {
   const registerRequestState = yield select(getRegisterRequestState);
 
   if (!registerRequestState.pending) {
     try {
-      const registerFields = yield select(getRegisterFields);
-
       const { data } = yield call(axios.post, '/api/register', `
         mutation {
-          registerUser (${registerFields}) {
+          verifyEmail (confirm_token: "${action.payload.confirm_token}") {
             result
           }
         }
       `);
 
-      if (data.errors) {
-        yield put(registerActions.formSubmitted({
-          payload: {
-            fields: JSON.parse(data.errors)
-          }
-        }));
-        return;
-      }
+      if (data.errors) throw new Error;
 
       yield put(redirectActions.go({
         payload: {
@@ -36,7 +27,7 @@ export default function* () {
       }));
 
       yield put(msgBoxActions.dialogue({
-        payload: 'Your account has been created. Please confirm your email address by following the instructions we sent to your inbox.'
+        payload: 'Thank you for verifying your email address. You may now login with your account.'
       }));
 
       yield put(registerActions.formSubmitted({

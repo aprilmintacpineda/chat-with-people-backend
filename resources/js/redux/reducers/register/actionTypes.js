@@ -6,5 +6,6 @@ export default {
   editPassword: 'RegisterEditPassword',
   editRepassword: 'RegisterEditRepassword',
   formSubmit: 'RegisterFormSubmit',
-  formSubmitted: 'RegisterFormSubmitted'
+  formSubmitted: 'RegisterFormSubmitted',
+  verifyEmail: 'RegisterFormVerifyEmail'
 };

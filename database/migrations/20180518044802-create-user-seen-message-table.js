@@ -10,5 +10,5 @@ export default {
     },
     seen_at: Sequelize.BIGINT(20)
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('user_seen_message')
+  down: queryInterface => queryInterface.dropTable('user_seen_message')
 };

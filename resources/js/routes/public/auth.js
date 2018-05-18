@@ -1,7 +1,7 @@
 import React from 'react';
+import Wrappers from '../../components/Wrappers';
 import Login from '../../screens/Login';
 import Register from '../../screens/Register';
-import Wrappers from '../../components/Wrappers';
 
 const authLoginComponent = props => (
   <Wrappers {...props}>
@@ -21,7 +21,7 @@ export default [
     component: authLoginComponent
   },
   {
-    path: '/auth/register',
+    path: '/auth/register/:confirm_token?',
     component: authRegisterComponent
   }
 ];

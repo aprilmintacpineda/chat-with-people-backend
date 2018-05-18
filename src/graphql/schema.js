@@ -4,7 +4,8 @@ import {
   GraphQLObjectType,
   GraphQLList
 } from 'graphql';
-import registerUser from './registerUser';
+import registerUser from './mutations/registerUser';
+import verifyEmail from './mutations/verifyEmail';
 import userType from './types/user';
 
 const users = [
@@ -31,7 +32,8 @@ const users = [
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    registerUser
+    registerUser,
+    verifyEmail
   }
 });
 
