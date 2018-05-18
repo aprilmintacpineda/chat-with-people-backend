@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Errors from './Errors';
 
 class Button extends React.Component {
-  handleClick = changeEvent => {
+  handleClick = () => {
     if (!this.props.loading) {
       this.props.onClick();
     }

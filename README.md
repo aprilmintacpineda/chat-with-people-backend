@@ -1,6 +1,7 @@
 # UNDER DEVELOPMENT
 
 Trello board: https://trello.com/b/XoVn7s2F
+Database Scheme: https://www.dbdesigner.net/designer/schema/172591
 
 # chat-with-people-backend
 
@@ -12,6 +13,7 @@ Backend codes for the project ChatWithPeople web application. This project was p
 - You can register and of course log in.
 - Search for users.
 - Initiate chat with other users.
+- Add other users to the conversation to create a group.
 - You can even chat yourself (if it makes you happy).
 
 # Technologies used
@@ -25,7 +27,19 @@ Backend codes for the project ChatWithPeople web application. This project was p
 - Axios
 - Socket.io
 - GraphQL
-- JWT
+- JWT with JSRSASign
+- Sequelize
+- SASS
+- Smart-Input-Validator
+- Redux-Abstract
+
+###### Dev
+
+- Babel
+- Nodemon
+- Webpack
+- Autoprefixer
+- ESLint
 
 # Run it
 
@@ -67,7 +81,6 @@ Edit `src/config/sequelize.json`. It should look something like this:
 After you have set that up.
 
 ```
-npm run db:init
 npm run db:install
 ```
 
@@ -98,3 +111,28 @@ To build for dev mode `npm run webpack`. To build for production mode, which is 
 To run in dev mode `npm run start`. To run in production mode `npm run start:production`.
 
 Now you can access the web interface via `localhost:3000`.
+
+# Clean up
+
+Once you're done looking at it, and you've decided to delete the whole thing.
+
+```
+npm run db:remove
+cd ..
+rm -rf chat-with-people-backend
+rm -rf chat-with-people-mobile
+```
+
+That should:
+
+- Delete the database.
+- Delete the backend and the web interface source code.
+- Delete the mobile source code.
+
+# License
+
+MIT
+
+Created with <3 by [April Mintac Pineda](https://aprilmintacpineda.github.io/).
+
+Credits to the open source projects that I used for this project.

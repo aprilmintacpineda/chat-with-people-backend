@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import AuthButtons from './partials/AuthButtons';
 import InputText from '../components/forms/InputText';
 import Button from '../components/forms/Button';
@@ -137,6 +138,17 @@ class Register extends React.Component {
     );
   }
 }
+
+Register.propTypes = {
+  registerState: PropTypes.object.isRequired,
+  editFullName: PropTypes.func.isRequired,
+  editSex: PropTypes.func.isRequired,
+  editUsername: PropTypes.func.isRequired,
+  editEmail: PropTypes.func.isRequired,
+  editPassword: PropTypes.func.isRequired,
+  editRepassword: PropTypes.func.isRequired,
+  formSubmit: PropTypes.func.isRequired
+};
 
 export default connect(store => ({
   registerState: { ...store.register }

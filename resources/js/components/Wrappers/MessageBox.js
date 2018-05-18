@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import msgBoxActions from '../../redux/reducers/messageBox/actions';
 import Button from '../forms/Button';
 
@@ -35,6 +36,12 @@ class MessageBox extends React.Component {
     );
   }
 }
+
+MessageBox.propTypes = {
+  msgBoxState: PropTypes.object.isRequired,
+  flushMessage: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
+};
 
 export default connect(store => ({
   msgBoxState: { ...store.messageBox }

@@ -48,8 +48,9 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   validationRules: PropTypes.string,
-  valdiationMessages: PropTypes.objectOf(PropTypes.string),
-  errors: PropTypes.arrayOf(PropTypes.string)
+  validationMessages: PropTypes.objectOf(PropTypes.string),
+  errors: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.string)
 };
 
 Select.defaultProps = {
@@ -57,8 +58,9 @@ Select.defaultProps = {
   onChange: null,
   disabled: false,
   validationRules: null,
-  valdiationMessages: {},
-  errors: null
+  validationMessages: {},
+  errors: null,
+  options: []
 };
 
 export default Select;

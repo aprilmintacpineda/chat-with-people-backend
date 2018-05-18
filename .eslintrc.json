@@ -12,6 +12,9 @@
         "jsx": true
       }
   },
+  "extends": [
+    "plugin:react/recommended"
+  ],
   "rules": {
     "rest-spread-spacing": ["error", "never"],
     "semi": ["error", "always"],

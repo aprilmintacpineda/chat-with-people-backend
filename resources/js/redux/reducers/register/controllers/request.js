@@ -1,6 +1,6 @@
 import initialState from '../initialState';
 
-export function formSubmit (state, action) {
+export function formSubmit (state) {
   return {
     ...state,
     request: {

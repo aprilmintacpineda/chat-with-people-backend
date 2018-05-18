@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import redirectActions from '../../redux/reducers/redirect/actions';
 
 class Redirect extends React.Component {
-  componentWillUpdate (nextProps) {
+  componentDidUpdate (nextProps) {
     const { to } = nextProps.redirectState;
-
-    console.log(to);
 
     if (to) {
       this.props.clear();
@@ -18,6 +17,12 @@ class Redirect extends React.Component {
     return this.props.children;
   }
 }
+
+Redirect.propTypes = {
+  clear: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired
+};
 
 export default connect(store => ({
   redirectState: { ...store.redirect }

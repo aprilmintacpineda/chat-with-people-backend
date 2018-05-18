@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import AuthButtons from './partials/AuthButtons';
 
 export default class Home extends React.Component {
@@ -29,7 +28,7 @@ export default class Home extends React.Component {
   }
 
   nextPage = () => {
-    const page = this.state.page == this.state.lastPage? 1 : ++this.state.page;
+    const page = this.state.page == this.state.lastPage? 1 : this.state.page + 1;
 
     return this.setState({
       ...this.state,
@@ -38,7 +37,7 @@ export default class Home extends React.Component {
   }
 
   prevPage = () => {
-    const page = this.state.page == 1? this.state.lastPage : --this.state.page;
+    const page = this.state.page == 1? this.state.lastPage : this.state.page - 1;
 
     return this.setState({
       ...this.state,
@@ -47,8 +46,6 @@ export default class Home extends React.Component {
   }
 
   render () {
-    console.log('home', this.props.testState, this.state);
-
     let contents;
 
     switch (this.state.page) {
@@ -75,7 +72,7 @@ export default class Home extends React.Component {
           <div key={3} className="title-container animate-slide-left">
             <p className="fas fa-user-lock icon" />
             <p className="title">Safe, secured, and free!</p>
-            <p className="small-desc">Rest assured that you're data is safe, even when you're offline.</p>
+            <p className="small-desc">{'Rest assured that you\'re data is safe, even when you\'re offline.'}</p>
           </div>
         );
       break;

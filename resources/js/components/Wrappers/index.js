@@ -1,8 +1,9 @@
 import React from 'react';
 import MessageBox from './MessageBox';
 import Redirect from './Redirect';
+import PropTypes from 'prop-types';
 
-export default class Wrappers extends React.Component {
+class Wrappers extends React.Component {
   render () {
     return (
       <MessageBox>
@@ -13,3 +14,10 @@ export default class Wrappers extends React.Component {
     );
   }
 }
+
+Wrappers.propTypes = {
+  history: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired
+};
+
+export default Wrappers;
