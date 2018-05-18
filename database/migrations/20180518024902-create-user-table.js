@@ -13,8 +13,13 @@ export default {
       unique: true
     },
     password: Sequelize.STRING(255),
+    fullname: Sequelize.STRING(70),
     sex: Sequelize.STRING(6),
     created_at: Sequelize.BIGINT(20),
+    verified_at: {
+      type: Sequelize.BIGINT(20),
+      allowNull: true
+    },
     deleted_at: {
       type: Sequelize.BIGINT(20),
       allowNull: true

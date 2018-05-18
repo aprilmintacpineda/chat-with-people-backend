@@ -28,7 +28,7 @@ class Register extends React.Component {
                 onChange={fullname => this.props.editFullName({
                   payload: { fullname }
                 })}
-                validationRules="required|allowedChars:alphabets,spaces"
+                validationRules="required|allowedChars:alphabets,spaces|between:2,70"
                 validationMessages={{
                   _$all: 'Please enter your real full name.'
                 }}
@@ -69,7 +69,7 @@ class Register extends React.Component {
                 validationMessages={{
                   required: 'Please enter your desired username.',
                   betweenLen: 'Your username must be 8 to 20 characters long.',
-                  notRegex: 'Your username must be composed of alphabets, numbers, and underscores. It must begin with an alphabet.'
+                  notRegex: 'Your username must be composed of alphabets, numbers, and underscores. It must begin and end with an alphabet.'
                 }}
                 disabled={this.props.registerState.request.pending}
               />

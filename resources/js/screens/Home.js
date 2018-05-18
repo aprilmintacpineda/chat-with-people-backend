@@ -9,7 +9,8 @@ export default class Home extends React.Component {
       showButtons: false,
       showContents: false,
       page: 1,
-      lastPage: 3
+      lastPage: 3,
+      interval: null
     };
   }
 
@@ -22,13 +23,32 @@ export default class Home extends React.Component {
 
       setTimeout(() => this.setState({
         ...this.state,
-        showButtons: true
+        showButtons: true,
+        interval: this.autoNavigate()
       }), 500);
     }, 500);
   }
 
+  autoNavigate = () => {
+    return setInterval(() => this.setState({
+      ...this.state,
+      page: this.state.page + 1
+    }), 1000);
+  }
+
+  clearAutoNavigate = () => {
+    clearInterval(this.state.interval);
+
+    return setTimeout(() => this.setState({
+      ...this.state,
+      interval: this.autoNavigate()
+    }), 1000);
+  }
+
   nextPage = () => {
     const page = this.state.page == this.state.lastPage? 1 : this.state.page + 1;
+
+    this.clearAutoNavigate();
 
     return this.setState({
       ...this.state,

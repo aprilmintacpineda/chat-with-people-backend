@@ -7,7 +7,7 @@ export default function (args) {
       errors: validator({
         fullname: args.fullname
       }, {
-        fullname: 'required|allowedChars:alphabets,spaces'
+        fullname: 'required|allowedChars:alphabets,spaces|between:2,70'
       }, {
         fullname: {
           _$all: 'Please enter your real full name.'
@@ -32,11 +32,12 @@ export default function (args) {
       errors: validator({
         username: args.username
       }, {
-        username: 'required|allowedChars:alphabets,numbers'
+        username: 'required|notRegex:/^(?![0-9_])[a-zA-Z0-9_]+(?<![_])$/|betweenLen:8,20'
       }, {
         username: {
           required: 'Please enter your desired username.',
-          allowedChars: 'Username is invalid, must only be alphabets and numbers.'
+          betweenLen: 'Your username must be 8 to 20 characters long.',
+          notRegex: 'Your username must be composed of alphabets, numbers, and underscores. It must begin and end with an alphabet.'
         }
       })
     },

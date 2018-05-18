@@ -15,10 +15,7 @@ export default function* () {
       const { data } = yield call(axios.post, '/api/login', `
         mutation {
           registerUser (${registerFields}) {
-            user_id,
-            username,
-            fullname,
-            sex
+            result
           }
         }
       `);
