@@ -53,8 +53,9 @@
     "webpack": "^3.12.0"
   },
   "scripts": {
-    "db:remove": "babel-node node_modules/.bin/sequelize db:drop",
+    "db:uninstall": "babel-node node_modules/.bin/sequelize db:drop",
     "db:install": "babel-node node_modules/.bin/sequelize db:create && babel-node node_modules/.bin/sequelize db:migrate",
+    "db:reinstall": "npm run db:uninstall && npm run db:install",
     "db:migration:create": "babel-node node_modules/.bin/sequelize migration:generate",
     "reinstallNodeModules": "rm -rf node_modules && npm install",
     "test": "jest",
@@ -62,8 +63,8 @@
     "config:sequelize": "babel-node node_modules/.bin/sequelize init",
     "config:init": "npm run config:nodemailer && npm run config:sequelize",
     "create:migration": "babel-node node_modules/.bin/sequelize migration:generate",
-    "eslint": "node node_modules/eslint/bin/eslint.js --parser babel-eslint 'src/**/**/*.js', 'resources/js/**/**/*.js'",
-    "eslint-watch": "node node_modules/eslint-watch/bin/esw --parser babel-eslint 'src/**/**/*.js' --watch",
+    "eslint": "node node_modules/eslint/bin/eslint.js --parser babel-eslint 'src/**/**/*.js', 'resources/js/**/**/*.js', 'database/**/**/*.js'",
+    "eslint-watch": "node node_modules/eslint-watch/bin/esw --parser babel-eslint 'src/**/**/*.js', 'resources/js/**/**/*.js', 'database/**/**/*.js' --watch",
     "build": "rm -rf build && babel src --out-dir build --minified && cp src/config/sequelize.json build/config/sequelize.json && cp src/config/nodemailer.js build/config/nodemailer.js && cp -R src/public build",
     "start:production": "npm run build && node build/server.js",
     "start": "nodemon --exec babel-node ./src/server.js",

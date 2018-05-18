@@ -6,9 +6,9 @@ class Errors extends React.Component {
     if (!this.props.errors) return null;
 
     return (
-      <div className="error-messages">
-        { this.props.errors.map((error, i) => <p key={i}>{error}</p>) }
-      </div>
+      <ul className="error-messages">
+        { this.props.errors.map((error, i) => <li key={i}>{error}</li>) }
+      </ul>
     );
   }
 }

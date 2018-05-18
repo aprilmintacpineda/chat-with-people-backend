@@ -78,11 +78,7 @@ Edit `src/config/sequelize.json`. It should look something like this:
   // ......
 ```
 
-After you have set that up.
-
-```
-npm run db:install
-```
+After you have set that up, you can create the database and run the migration by running `npm run db:install`. You can also re-install it from (if for some reason you want that) by running `npm run db:reinstall`.
 
 #### 1.3 Notes
 
@@ -112,12 +108,16 @@ To run in dev mode `npm run start`. To run in production mode `npm run start:pro
 
 Now you can access the web interface via `localhost:3000`.
 
+# NPM Scripting
+
+- `npm run eslint` should run eslint against `resources/js` and `src/` folders.
+
 # Clean up
 
 Once you're done looking at it, and you've decided to delete the whole thing.
 
 ```
-npm run db:remove
+npm run db:uninstall
 cd ..
 rm -rf chat-with-people-backend
 rm -rf chat-with-people-mobile
