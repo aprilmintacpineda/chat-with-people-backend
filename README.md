@@ -82,7 +82,7 @@ Edit `src/config/sequelize.json`. It should look something like this:
 
 After you have set that up, you can create the database and run the migration by running `npm run db:install`. You can also re-install it from (if for some reason you want that) by running `npm run db:reinstall`.
 
-#### 1.3 Notes
+###### Note
 
 - If you are going to run production mode, you need to edit the `production` key as well.
 
