@@ -10,10 +10,12 @@ Backend codes for the project ChatWithPeople web application. This project was p
 # What it does
 
 - It's a simple chat application that uses JWT and GraphQL.
-- You can register and of course log in.
-- Search for users.
+- Account registration.
+- Email verification (I used [mailtrap](https://mailtrap.io/))
+- Sign in.
+- Search for users (by email or username).
 - Initiate chat with other users.
-- Add other users to the conversation to create a group.
+- Add other users to the conversation to create a group chat.
 - You can even chat yourself (if it makes you happy).
 
 # Technologies used
