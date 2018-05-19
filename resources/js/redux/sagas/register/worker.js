@@ -1,6 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
-import { getRegisterRequestState, getRegisterFields } from './selectors';
+import { getRegisterFields } from './selectors';
 import registerActions from '../../reducers/register/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
@@ -27,14 +27,14 @@ export default function* (action) {
         return;
       }
 
+      yield put(msgBoxActions.dialogue({
+        payload: 'Your account has been created. Please confirm your email address by following the instructions we sent to your inbox.'
+      }));
+
       yield put(redirectActions.go({
         payload: {
           to: '/auth/login'
         }
-      }));
-
-      yield put(msgBoxActions.dialogue({
-        payload: 'Your account has been created. Please confirm your email address by following the instructions we sent to your inbox.'
       }));
 
       yield put(registerActions.formSubmitted({

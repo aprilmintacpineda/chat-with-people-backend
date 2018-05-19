@@ -8,13 +8,15 @@ Database Scheme: https://www.dbdesigner.net/designer/schema/172591
 
 Backend codes for the project ChatWithPeople web application. This project was part of my studies about JWT and GraphQL.
 
+Chat with people is a social networking application.
+
 # What it does
 
 - It's a simple chat application that uses JWT and GraphQL.
 - Account registration.
 - Email verification (I used [mailtrap](https://mailtrap.io/))
 - Sign in.
-- Search for users (by email or username).
+- Search for users (name, email, or username).
 - Initiate chat with other users.
 - Add other users to the conversation to create a group chat.
 - You can even chat yourself (if it makes you happy).

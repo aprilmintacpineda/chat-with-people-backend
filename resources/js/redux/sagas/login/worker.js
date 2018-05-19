@@ -1,6 +1,7 @@
 import { call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
-import { getLoginFields, getLoginRequestState } from './selectors';
+import { getLoginFields } from './selectors';
+import sessionActions from '../../reducers/session/actions';
 import loginActions from '../../reducers/login/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
@@ -14,7 +15,6 @@ export default function* (action) {
         query {
           loginUser (${loginFields}) {
             fullname,
-            user_id,
             username,
             sex,
             token
@@ -31,23 +31,31 @@ export default function* (action) {
         return;
       }
 
-      console.log('response', data);
+      localStorage.setItem('token', data.data.loginUser.token);
 
-      // yield put(redirectActions.go({
-      //   payload: {
-      //     to: '/auth/login'
-      //   }
-      // }));
+      yield put(sessionActions.setSession({
+        payload: {
+          user: {
+            username: data.data.loginUser.username,
+            email: data.data.loginUser.email,
+            sex: data.data.loginUser.sex,
+            fullname: data.data.loginUser.fullname
+          },
+          checked: true
+        }
+      }));
 
-      // yield put(msgBoxActions.dialogue({
-      //   payload: 'Your account has been created. Please confirm your email address by following the instructions we sent to your inbox.'
-      // }));
+      yield put(redirectActions.go({
+        payload: {
+          to: '/' + data.data.loginUser.username
+        }
+      }));
 
-      // yield put(loginActions.formSubmitted({
-      //   payload: {
-      //     success: true
-      //   }
-      // }));
+      yield put(loginActions.formSubmitted({
+        payload: {
+          success: true
+        }
+      }));
     } catch (e) {
       yield put(loginActions.formSubmitted());
       yield put(msgBoxActions.dialogue({

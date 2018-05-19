@@ -1,17 +1,22 @@
 import React from 'react';
 import Wrappers from '../../components/Wrappers';
+import NotLoggedIn from '../../components/NotLoggedIn';
 import Login from '../../screens/Login';
 import Register from '../../screens/Register';
 
 const authLoginComponent = props => (
   <Wrappers {...props}>
-    <Login {...props} />
+    <NotLoggedIn>
+      <Login {...props} />
+    </NotLoggedIn>
   </Wrappers>
 );
 
 const authRegisterComponent = props => (
   <Wrappers {...props}>
-    <Register {...props} />
+    <NotLoggedIn>
+      <Register {...props} />
+    </NotLoggedIn>
   </Wrappers>
 );
 

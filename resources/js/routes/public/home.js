@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../../screens/Home';
 import Wrappers from '../../components/Wrappers';
+import Home from '../../screens/Home';
 
 const homeComponent = props => (
   <Wrappers {...props}>

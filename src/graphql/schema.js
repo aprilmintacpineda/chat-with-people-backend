@@ -7,6 +7,7 @@ import {
 import registerUser from './mutations/registerUser';
 import verifyEmail from './mutations/verifyEmail';
 import loginUser from './queries/loginUser';
+import getSession from './queries/getSession';
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -19,7 +20,8 @@ const Mutation = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
   fields: {
-    loginUser
+    loginUser,
+    getSession
   }
 });
 
