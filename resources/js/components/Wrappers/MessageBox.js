@@ -5,6 +5,14 @@ import msgBoxActions from '../../redux/reducers/messageBox/actions';
 import Button from '../forms/Button';
 
 class MessageBox extends React.Component {
+  componentDidUpdate () {
+    if (this.props.msgBoxState.message) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+  }
+
   render () {
     let messageBox = null;
 
@@ -40,7 +48,8 @@ class MessageBox extends React.Component {
 MessageBox.propTypes = {
   msgBoxState: PropTypes.object.isRequired,
   flushMessage: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  dialogue: PropTypes.func.isRequired
 };
 
 export default connect(store => ({

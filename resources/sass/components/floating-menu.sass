@@ -1,0 +1,50 @@
+.floating-menu-wrapper
+  .header
+    position: fixed
+    bottom: 20px
+    right: 20px
+    z-index: 1000
+  .icon
+    font-size: 20px
+    color: #ffffff
+    background-color: #0c4b87
+    border-radius: 100%
+    padding: 10px
+    cursor: pointer
+  .body
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(0, 0, 0, 0.5)
+    z-index: 999
+    .overlay
+      position: fixed
+      bottom: 70px
+      right: 20px
+      background-color: #ffffff
+      display: flex
+      padding: 10px
+      flex-direction: column
+      border-radius: 4px
+      z-index: 1000
+      .separator
+        border-bottom: 1px solid #5e5e5e
+        width: 100%
+        margin: 5px 0
+      div
+        padding: 5px
+        text-align: right
+      a
+        color: #5e5e5e
+        text-decoration: none
+        transition: all 300ms
+        &:first-child:hover
+          border-radius: 4px 4px 0 0
+          color: #0c4b87
+        &:last-child:hover
+          border-radius: 0 0 4px 4px
+          color: #0c4b87
+        &:hover
+          color: #0c4b87
