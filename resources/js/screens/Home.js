@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthButtons from './partials/AuthButtons';
+import AuthButtons from '../components/AuthButtons';
 
 export default class Home extends React.Component {
   constructor (props) {

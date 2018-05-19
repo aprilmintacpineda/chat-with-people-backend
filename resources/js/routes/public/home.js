@@ -1,10 +1,13 @@
 import React from 'react';
 import Wrappers from '../../components/Wrappers';
 import Home from '../../screens/Home';
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 const homeComponent = props => (
   <Wrappers {...props}>
-    <Home {...props}/>
+    <NotLoggedIn>
+      <Home {...props}/>
+    </NotLoggedIn>
   </Wrappers>
 );
 

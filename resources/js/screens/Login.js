@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AuthButtons from './partials/AuthButtons';
+import AuthButtons from '../components/AuthButtons';
 import InputText from '../components/forms/InputText';
 import Button from '../components/forms/Button';
 import BlockLoading from '../components/BlockLoading';
