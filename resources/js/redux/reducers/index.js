@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import register from './register';
-import login from './register';
+import login from './login';
 import messageBox from './messageBox';
 import redirect from './redirect';
 

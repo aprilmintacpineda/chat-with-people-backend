@@ -1,0 +1,1 @@
+export default 'how long should this be in order to be counted as strong?';

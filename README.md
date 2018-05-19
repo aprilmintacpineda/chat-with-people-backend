@@ -1,6 +1,7 @@
 # UNDER DEVELOPMENT
 
 Trello board: https://trello.com/b/XoVn7s2F
+
 Database Scheme: https://www.dbdesigner.net/designer/schema/172591
 
 # chat-with-people-backend

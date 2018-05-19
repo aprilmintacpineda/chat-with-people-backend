@@ -7,6 +7,7 @@ export default {
     value: '',
     errors: []
   },
+  submitError: [],
   request: {
     pending: false
   }

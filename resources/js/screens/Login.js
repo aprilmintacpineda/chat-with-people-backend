@@ -25,7 +25,7 @@ class Login extends React.Component {
                 onChange={email => this.props.editEmail({
                   payload: { email }
                 })}
-                validationRules="required"
+                validationRules="required|email"
                 validationMessages={{
                   _$all: 'Please enter your email.'
                 }}
@@ -52,7 +52,12 @@ class Login extends React.Component {
             <div className="field">
               <Button
                 text="Sign in"
-                onClick={this.props.formSubmit}
+                errors={this.props.loginState.submitError}
+                onClick={() => this.props.formSubmit({
+                  payload: {
+                    pending: this.props.loginState.request.pending
+                  }
+                })}
                 loading={this.props.loginState.request.pending}
               />
             </div>
@@ -62,6 +67,14 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginState: PropTypes.object.isRequired,
+  editEmail: PropTypes.func.isRequired,
+  editPassword: PropTypes.func.isRequired,
+  formSubmit: PropTypes.func.isRequired,
+  formSubmitted: PropTypes.func.isRequired
+};
 
 export default connect(store => ({
   loginState: { ...store.login }

@@ -1,12 +1,11 @@
 import express from 'express';
 import expressJWT from 'express-jwt';
 import expressGraphQL from 'express-graphql';
-import jsrsasign from 'jsrsasign';
 import graphqlSchema from './graphql/schema';
+import secret from './secret';
 
 const app = express();
 const publicDir = __dirname + '/public';
-const secret = 'how long should this be in order to be counted as strong?';
 const pathsWithNoJWT = [
   '/api/login',
   '/api/register'

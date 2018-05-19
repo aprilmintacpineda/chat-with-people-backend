@@ -137,7 +137,11 @@ class Register extends React.Component {
             <div className="field">
               <Button
                 text="Create account"
-                onClick={this.props.formSubmit}
+                onClick={() => this.props.formSubmit({
+                  payload: {
+                    pending: this.props.registerState.request.pending
+                  }
+                })}
                 loading={this.props.registerState.request.pending}
               />
             </div>
@@ -157,7 +161,8 @@ Register.propTypes = {
   editPassword: PropTypes.func.isRequired,
   editRepassword: PropTypes.func.isRequired,
   formSubmit: PropTypes.func.isRequired,
-  verifyEmail: PropTypes.func.isRequired
+  verifyEmail: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired
 };
 
 export default connect(store => ({

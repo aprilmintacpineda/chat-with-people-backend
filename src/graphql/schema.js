@@ -6,28 +6,7 @@ import {
 } from 'graphql';
 import registerUser from './mutations/registerUser';
 import verifyEmail from './mutations/verifyEmail';
-import userType from './types/user';
-
-const users = [
-  {
-    user_id: 'axsdaew',
-    fullname: 'April Mintac Pineda',
-    sex: 'Male',
-    username: 'aprilmintacpineda'
-  },
-  {
-    user_id: 'zxczxvxcv',
-    fullname: 'Katherine Manalo Singson',
-    sex: 'Female',
-    username: 'kathysingson'
-  },
-  {
-    user_id: 'qweqweqwe',
-    fullname: 'Cyrine Julianne Manalo Singson',
-    sex: 'Female',
-    username: 'cjsingson'
-  }
-];
+import loginUser from './queries/loginUser';
 
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -40,18 +19,7 @@ const Mutation = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
   fields: {
-    searchUsers: {
-      type: new GraphQLList(userType),
-      args: {
-        fullname: { type: GraphQLString },
-        username: { type: GraphQLString }
-      },
-      resolve (parentValue, args) {
-        // console.log(parentValue, args);
-
-        return users;
-      }
-    }
+    loginUser
   }
 });
 

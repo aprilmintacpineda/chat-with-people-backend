@@ -1,5 +1,4 @@
 import { GraphQLString, GraphQLObjectType } from 'graphql';
-import validator from 'smart-input-validator';
 import PasswordHash from 'password-hash';
 import nodemailer from 'nodemailer';
 import createType from '../types/create';

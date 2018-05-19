@@ -15,7 +15,7 @@ export default class Home extends React.Component {
   }
 
   componentWillUnmount () {
-    this.clearAutoNavigate(true);
+    this.clearAutoNavigate();
   }
 
   componentDidMount () {
@@ -34,22 +34,29 @@ export default class Home extends React.Component {
   }
 
   autoNavigate = () => {
-    return setInterval(() => this.nextPage(), 3000);
+    return setInterval(() => this.nextPage(), 2000);
   }
 
-  clearAutoNavigate = should => {
+  clearAutoNavigate = () => {
     clearInterval(this.state.interval);
+
+    return this.setState({
+      ...this.state,
+      interval: null
+    });
+  }
+
+  pauseInterval = () => {
+    this.clearAutoNavigate();
 
     return setTimeout(() => this.setState({
       ...this.state,
       interval: this.autoNavigate()
-    }), 3000);
+    }), 5000);
   }
 
   nextPage = () => {
     const page = this.state.page == this.state.lastPage? 1 : this.state.page + 1;
-
-    this.clearAutoNavigate();
 
     return this.setState({
       ...this.state,
@@ -101,8 +108,20 @@ export default class Home extends React.Component {
 
     return (
       <div className="home-body body-wrapper">
-        <span className="fas fa-chevron-right next next-prev-btns animate-shoot-down" onClick={this.nextPage} />
-        <span className="fas fa-chevron-left prev next-prev-btns animate-shoot-down" onClick={this.prevPage} />
+        <span
+          className="fas fa-chevron-right next next-prev-btns animate-shoot-down"
+          onClick={() => {
+            this.pauseInterval();
+            this.nextPage();
+          }}
+        />
+        <span
+          className="fas fa-chevron-left prev next-prev-btns animate-shoot-down"
+          onClick={() => {
+            this.pauseInterval();
+            this.prevPage();
+          }}
+        />
         <AuthButtons />
         {contents}
       </div>

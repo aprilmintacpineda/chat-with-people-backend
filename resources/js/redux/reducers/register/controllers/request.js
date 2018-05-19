@@ -1,8 +1,9 @@
 import initialState from '../initialState';
+import { clearErrors } from '../../../../Utils';
 
 export function formSubmit (state) {
   return {
-    ...state,
+    ...clearErrors(state),
     request: {
       pending: true
     }

@@ -1,8 +1,9 @@
 import initialState from '../initialState';
+import { clearErrors } from '../../../../Utils';
 
 export function formSubmit (state) {
   return {
-    ...state,
+    ...clearErrors(state, [ 'submitError' ]),
     request: {
       pending: true
     }
@@ -10,7 +11,7 @@ export function formSubmit (state) {
 }
 
 export function formSubmitted (state, action) {
-  if (action.payload.success) return { ...initialState };
+  if (action.payload && action.payload.success) return { ...initialState };
 
   return action.payload && action.payload.fields ? {
     ...state,
