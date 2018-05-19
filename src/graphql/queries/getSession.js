@@ -13,6 +13,8 @@ export default {
     return new Promise((resolve, reject) => {
       const userData = jsonwebtoken.decode(args.token);
 
+      if (Date.now() >= userData.exp * 1000) return reject();
+
       sequelize.query('select * from user where email = :email and confirmed_at is not null', {
         replacements: {
           email: userData.email
