@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import sessionActions from '../../reducers/session/actions';
+import sessionActions from '../../../reducers/session/actions';
 
 export default function* (action) {
   if (!action.payload.pending) {

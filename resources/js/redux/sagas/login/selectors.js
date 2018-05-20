@@ -1,3 +1,5 @@
 import { getGraphQLFriendlyFields } from '../../../Utils';
 
-export const getLoginFields = (state, exceptions) => getGraphQLFriendlyFields(state.login, exceptions);
+export function getLoginFields (state, exceptions) {
+  return getGraphQLFriendlyFields(state.login, exceptions);
+}

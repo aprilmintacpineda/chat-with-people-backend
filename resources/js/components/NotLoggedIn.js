@@ -8,8 +8,8 @@ class NotLoggedIn extends React.Component {
     this.validateUser(this.props);
   }
 
-  componentDidUpdate (nextProps) {
-    this.validateUser(nextProps);
+  componentDidUpdate () {
+    this.validateUser(this.props);
   }
 
   validateUser = props => {

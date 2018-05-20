@@ -1,8 +1,11 @@
 import React from 'react';
-import Icon from './Icon';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Icon from './Icon';
+import sessionActions from '../redux/reducers/session/actions';
 
-export default class FloatingMenu extends React.Component {
+class FloatingMenu extends React.Component {
   constructor (props) {
     super(props);
 
@@ -14,13 +17,20 @@ export default class FloatingMenu extends React.Component {
   toggleMenu = () => {
     this.setState({
       menuVisible: !this.state.menuVisible
-    }, () => {
-      if (this.state.menuVisible) {
-        document.body.style.overflowY = 'hidden';
-      } else {
-        document.body.style.overflowY = 'auto';
-      }
-    });
+    }, () => this.hideYScroll(this.state));
+  }
+
+  hideYScroll = state => {
+    if (state.menuVisible) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+  }
+
+  logout = () => {
+    localStorage.clear();
+    this.props.clearSession();
   }
 
   render () {
@@ -30,17 +40,24 @@ export default class FloatingMenu extends React.Component {
         <div className="body">
           <div className="overlay animate-shoot-down">
             <div>
-              <Link to="/">Profile</Link>
+              <Link to="/">Profile <Icon name="user-profile" /></Link>
             </div>
             <div>
-              <Link to="/">Newsfeed</Link>
+              <Link to="/">Newsfeed <Icon name="newsfeed" /></Link>
             </div>
             <div>
-              <Link to="/">Settings</Link>
+              <Link to="/">Settings <Icon name="cogs" /></Link>
             </div>
             <span className="separator" />
             <div>
-              <Link to="/">Log out</Link>
+              <Link to="/">Conversations <Icon name="conversations" /></Link>
+            </div>
+            <div>
+              <Link to="/">Search <Icon name="search" /></Link>
+            </div>
+            <span className="separator" />
+            <div>
+              <a onClick={this.logout}>Log out <Icon name="logout" /></a>
             </div>
           </div>
         </div>
@@ -60,3 +77,11 @@ export default class FloatingMenu extends React.Component {
     );
   }
 }
+
+FloatingMenu.propTypes = {
+  clearSession: PropTypes.func.isRequired
+};
+
+export default connect(null, {
+  ...sessionActions
+})(FloatingMenu);

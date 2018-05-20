@@ -93,10 +93,7 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-  sessionState: PropTypes.object.isRequired,
-  setSession: PropTypes.func.isRequired,
-  clearSession: PropTypes.func.isRequired,
-  getSession: PropTypes.func.isRequired
+  sessionState: PropTypes.object.isRequired
 };
 
 export default connect(store => ({

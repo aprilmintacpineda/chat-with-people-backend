@@ -8,5 +8,8 @@ export function setSession (state, action) {
 }
 
 export function clearSession () {
-  return { ...initialState };
+  return {
+    ...initialState,
+    checked: true
+  };
 }
