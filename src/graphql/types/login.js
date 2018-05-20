@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 export default new GraphQLObjectType({
-  name: 'userType',
+  name: 'loginType',
   fields: {
     fullname: { type: GraphQLString },
     sex: { type: GraphQLString },

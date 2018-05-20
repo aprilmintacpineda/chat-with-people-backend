@@ -42,7 +42,7 @@ export default {
           expiresIn: '7 days'
         });
 
-        resolve({
+        return resolve({
           ...user,
           token
         });
