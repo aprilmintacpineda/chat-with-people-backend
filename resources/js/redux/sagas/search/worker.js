@@ -12,6 +12,7 @@ export default function* (action) {
     const { data } = yield call(axios.post, '/api', `
       query {
         searchUsers (searchString: "${action.payload.value}") {
+          user_id,
           username,
           fullname
         }

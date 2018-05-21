@@ -10,6 +10,33 @@ class Profile extends React.Component {
       <div className="profile-page">
         <FloatingMenu />
         <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
+        <h1>Welcome to your profile, {this.props.sessionState.user.fullname}!</h1>
       </div>
     );
   }
