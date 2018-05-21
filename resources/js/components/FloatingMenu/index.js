@@ -1,13 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import Menu from './Menu';
 import Search from './Search';
-import InputText from '../forms/InputText';
-import sessionActions from '../../redux/reducers/session/actions';
-import chatActions from '../../redux/reducers/chat/actions';
 
 class FloatingMenu extends React.Component {
   constructor (props) {

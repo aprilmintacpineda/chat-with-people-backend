@@ -32,5 +32,5 @@ export function searchError (state,) {
       pending: false,
       error: true
     }
-  }
+  };
 }

@@ -74,8 +74,9 @@ class Search extends React.Component {
 
 Search.propTypes = {
   editSearchString: PropTypes.func.isRequired,
-  searchState: PropTypes.object.isRequired
-}
+  searchState: PropTypes.object.isRequired,
+  toggleSearch: PropTypes.func.isRequired
+};
 
 export default connect(store => ({
   searchState: { ...store.search }

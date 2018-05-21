@@ -1,7 +1,6 @@
-import { call, put, cancel, cancelled } from 'redux-saga/effects';
+import { call, put, cancel } from 'redux-saga/effects';
 import axios from 'axios';
 import searchActions from '../../reducers/search/actions';
-import actionTypes from '../../reducers/search/actionTypes';
 
 export default function* (action) {
   try {
