@@ -2,15 +2,15 @@ import { call, put, cancel } from 'redux-saga/effects';
 import axios from 'axios';
 import searchActions from '../../reducers/search/actions';
 
-export default function* (action) {
+export default function* ({ payload }) {
   try {
-    if (!action.payload.value.length) yield cancel();
+    if (!payload.value.length) yield cancel();
 
     const token = localStorage.getItem('token');
 
     const { data } = yield call(axios.post, '/api', `
       query {
-        searchUsers (searchString: "${action.payload.value}") {
+        searchUsers (searchString: "${payload.value}") {
           user_id,
           username,
           fullname

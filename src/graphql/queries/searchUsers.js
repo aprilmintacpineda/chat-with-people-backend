@@ -15,9 +15,7 @@ export default {
         },
         type: sequelize.QueryTypes.SELECT
       })
-      .then(users => {
-        return resolve(users);
-      });
+      .then(users => resolve(users));
     });
   }
 };

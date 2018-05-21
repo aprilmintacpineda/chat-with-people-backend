@@ -1,18 +1,15 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { getRegisterRequestState } from '../register/selectors';
 import registerActions from '../../reducers/register/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
 
-export default function* (action) {
-  const registerRequestState = yield select(getRegisterRequestState);
-
-  if (!registerRequestState.pending) {
+export default function* ({ payload }) {
+  if (!payload.pending) {
     try {
       const { data } = yield call(axios.post, '/api/register', `
         mutation {
-          verifyEmail (confirm_token: "${action.payload.confirm_token}") {
+          verifyEmail (confirm_token: "${payload.confirm_token}") {
             result
           }
         }

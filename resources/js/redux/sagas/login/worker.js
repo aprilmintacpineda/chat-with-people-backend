@@ -6,8 +6,8 @@ import loginActions from '../../reducers/login/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
 
-export default function* (action) {
-  if (!action.payload.pending) {
+export default function* ({ payload }) {
+  if (!payload.pending) {
     try {
       const loginFields = yield select(getLoginFields, [ 'submitError' ]);
 

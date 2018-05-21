@@ -5,8 +5,8 @@ import registerActions from '../../reducers/register/actions';
 import msgBoxActions from '../../reducers/messageBox/actions';
 import redirectActions from '../../reducers/redirect/actions';
 
-export default function* (action) {
-  if (!action.payload.pending) {
+export default function* ({ payload }) {
+  if (!payload.pending) {
     try {
       const registerFields = yield select(getRegisterFields);
 

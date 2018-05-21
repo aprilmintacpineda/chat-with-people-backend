@@ -4,8 +4,23 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import InputText from '../forms/InputText';
 import searchActions from '../../redux/reducers/search/actions';
+import chatActions from '../../redux/reducers/chat/actions';
 
 class Search extends React.Component {
+  chatWith = result => {
+    this.props.createChatHead({
+      payload: { ...result }
+    });
+
+    this.props.editSearchString({
+      payload: {
+        value: ''
+      }
+    });
+
+    this.props.toggleSearch();
+  }
+
   render () {
     let searchResults;
 
@@ -29,7 +44,7 @@ class Search extends React.Component {
         <div key={i} className="result">
           <p className="name">{result.fullname} | {result.username}</p>
           <div className="buttons">
-            <a onClick={() => console.log(result.user_id)}><Icon name="message" /> Chat</a>
+            <a onClick={() => this.chatWith(result)}><Icon name="message" /> Chat</a>
             <a><Icon name="user-profile" /> Profile</a>
             <a><Icon name="follow" /> Follow</a>
           </div>
@@ -75,11 +90,13 @@ class Search extends React.Component {
 Search.propTypes = {
   editSearchString: PropTypes.func.isRequired,
   searchState: PropTypes.object.isRequired,
-  toggleSearch: PropTypes.func.isRequired
+  toggleSearch: PropTypes.func.isRequired,
+  createChatHead: PropTypes.func.isRequired
 };
 
 export default connect(store => ({
   searchState: { ...store.search }
 }), {
-  ...searchActions
+  ...searchActions,
+  ...chatActions
 })(Search);

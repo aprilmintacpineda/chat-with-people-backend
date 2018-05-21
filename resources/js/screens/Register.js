@@ -13,7 +13,8 @@ class Register extends React.Component {
     if (this.props.match.params.confirm_token) {
       return this.props.verifyEmail({
         payload: {
-          confirm_token: this.props.match.params.confirm_token
+          confirm_token: this.props.match.params.confirm_token,
+          pending: this.props.registerState.request.pending
         }
       });
     }

@@ -50,8 +50,9 @@ export default {
         }
 
         const confirm_token = Utils.generateUID(20);
+        const fullname = Utils.ucwords(validatedInputs.fullname.value);
 
-        const html = welcomeMail(validatedInputs.fullname.value.split(' ')[0], confirm_token);
+        const html = welcomeMail(fullname.split(' ')[0], confirm_token);
 
         const mailOptions = {
           from: 'hello@chatwithpeople.io',
@@ -68,7 +69,7 @@ export default {
               username: validatedInputs.username.value,
               email: validatedInputs.email.value,
               password: PasswordHash.generate(validatedInputs.password.value),
-              fullname: Utils.ucwords(validatedInputs.fullname.value),
+              fullname,
               sex: validatedInputs.sex.value,
               created_at: Date.now(),
               confirm_token

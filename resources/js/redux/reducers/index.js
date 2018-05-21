@@ -5,6 +5,7 @@ import messageBox from './messageBox';
 import redirect from './redirect';
 import search from './search';
 import session from './session';
+import chat from './chat';
 
 export default combineReducers({
   register,
@@ -12,5 +13,6 @@ export default combineReducers({
   redirect,
   search,
   login,
-  session
+  session,
+  chat
 });

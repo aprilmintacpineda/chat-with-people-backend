@@ -2,12 +2,12 @@ import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import sessionActions from '../../../reducers/session/actions';
 
-export default function* (action) {
-  if (!action.payload.pending) {
+export default function* ({ payload }) {
+  if (!payload.pending) {
     try {
       const { data } = yield call(axios.post, '/api', `
         query {
-          getSession (token: "${action.payload.token}") {
+          getSession (token: "${payload.token}") {
             fullname,
             username,
             sex,
@@ -16,9 +16,11 @@ export default function* (action) {
         }
       `, {
         headers: {
-          Authorization: `Bearer ${action.payload.token}`
+          Authorization: `Bearer ${payload.token}`
         }
       });
+
+      if (data.errors) throw new Error;
 
       localStorage.setItem('token', data.data.getSession.token);
 

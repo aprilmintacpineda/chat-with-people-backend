@@ -22,6 +22,8 @@ export default {
         type: sequelize.QueryTypes.SELECT
       })
       .then(([ user ]) => {
+        if (!user) return reject();
+
         delete user.password;
         delete user.confirm_token;
         delete user.confirmed_at;
