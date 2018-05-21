@@ -3,5 +3,8 @@ import actionTypes from '../../../reducers/chat/actionTypes';
 import worker from './worker';
 
 export default function* () {
-  yield takeEvery(actionTypes.createChatHead, worker);
+  yield takeEvery([
+    actionTypes.createChatHead,
+    actionTypes.checkMessages
+  ], worker);
 }

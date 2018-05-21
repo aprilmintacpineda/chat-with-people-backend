@@ -54,6 +54,7 @@ class FloatingMenu extends React.Component {
         <div
           className="header"
           onClick={this.toggleMenu}
+          title="Open/close menu"
         >
           <Icon name="menu" />
         </div>

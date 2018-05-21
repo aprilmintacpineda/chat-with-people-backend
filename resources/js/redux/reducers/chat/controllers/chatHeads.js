@@ -37,25 +37,8 @@ export function createChatHead (state, action) {
 }
 
 export function removeChatHead (state, action) {
-  return state.filter((chat, i) => i != action.payload);
-}
-
-export function checkedMessages (state, action) {
   return {
     ...state,
-    chatHeads: state.chatHeads.map(chatHead => {
-      if (chatHead.user.user_id == action.payload.user_id) {
-        return {
-          ...chatHead,
-          chatMessages: [ ...action.payload.chatMessages ],
-          request: {
-            pending: false,
-            error: false
-          }
-        };
-      }
-
-      return { ...chatHead };
-    })
+    chatHeads: state.chatHeads.filter((chat, i) => i != action.payload)
   };
 }

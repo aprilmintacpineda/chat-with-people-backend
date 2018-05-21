@@ -1,0 +1,57 @@
+.chat-heads-wrapper
+  position: fixed
+  z-index: 99
+  bottom: 20px
+  left: 20px
+  display: flex
+  flex: 1
+  flex-direction: row
+  .loading
+    display: flex
+    flex: 1
+    justify-content: center
+    align-items: center
+    text-align: center
+  .chat-head-container
+    &:hover
+      .close-btn
+        opacity: 0.7
+    .close-btn
+      position: absolute
+      top: 0
+      left: -3px
+      color: #ff0000
+      cursor: pointer
+      opacity: 0
+      &:hover
+        opacity: 1
+  .chat-head
+    position: relative
+    margin-right: 10px
+    img
+      width: 50px
+      height: 50px
+      border: 1px solid #0c4b87
+      border-radius: 100%
+      cursor: pointer
+    .indicator
+      display: block
+      border-left: 10px solid transparent
+      border-right: 10px solid transparent
+      border-top: 10px solid #0c4b87
+      position: absolute
+      bottom: calc(100% + 5px)
+      left: 50%
+      transform: translate(-50%, 0)
+    .body
+      display: flex
+      flex: 1
+      flex-direction: column
+      position: absolute
+      background-color: #ffffff
+      border: 1px solid #0c4b87
+      border-radius: 4px
+      height: 300px
+      width: 300px
+      left: 0
+      bottom: calc(100% + 15px)

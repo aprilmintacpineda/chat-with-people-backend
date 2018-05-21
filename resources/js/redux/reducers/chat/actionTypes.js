@@ -1,5 +1,7 @@
 export default {
   createChatHead: 'ChatChatHeadCreate',
   removeChatHead: 'ChatChatHeadRemove',
-  checkedMessages: 'ChatChatHeadCheckedMessages'
+  checkedMessages: 'ChatChatHeadCheckedMessages',
+  checkMessages: 'ChatChatHeadCheckMessages',
+  toggleChatBody: 'ChatChatBodyToggle'
 };

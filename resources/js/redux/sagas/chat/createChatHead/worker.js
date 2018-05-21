@@ -30,5 +30,10 @@ export default function* ({ payload }) {
       }
     }));
   } catch (e) {
+    yield put(chatActions.checkedMessages({
+      payload: {
+        user_id: payload.user_id
+      }
+    }));
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import InputText from '../forms/InputText';
+import UnexpectedError from '../UnexpectedError';
 import searchActions from '../../redux/reducers/search/actions';
 import chatActions from '../../redux/reducers/chat/actions';
 
@@ -26,16 +27,13 @@ class Search extends React.Component {
 
     if (this.props.searchState.request.error) {
       searchResults = (
-        <div className="unexpect-error">
-          <p>An unexpected error occured. Please make sure that you are connected to the internet.</p>
-          <a onClick={() => this.props.editSearchString({
+        <UnexpectedError
+          onClick={() => this.props.editSearchString({
             payload: {
               value: this.props.searchState.searchString
             }
-          })}>
-            <Icon name="reload"/> Try again
-          </a>
-        </div>
+          })}
+        />
       );
     } else if (this.props.searchState.request.pending) {
       searchResults = <Icon name="loading" />;
