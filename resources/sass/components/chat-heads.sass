@@ -55,3 +55,86 @@
       width: 300px
       left: 0
       bottom: calc(100% + 15px)
+    .body-container
+      display: flex
+      flex: 1
+      flex-direction: column
+      .chat-messages
+        display: flex
+        flex: 9
+        flex-direction: column
+        overflow: auto
+        .seen-indicator
+          text-align: right
+          font-size: 14px
+          color: gray
+        .received
+          align-self: flex-start
+          margin: 5px
+          max-width: 80%
+          .seen-indicator
+            margin-left: 15px
+          .message
+            border-radius: 4px
+            background-color: #d3d3d3
+            padding: 10px
+            position: relative
+            margin-left: 15px
+            &:after
+              content: ''
+              display: block
+              border-top: 10px solid transparent
+              border-bottom: 10px solid transparent
+              border-right: 7px solid #d3d3d3
+              position: absolute
+              left: -7px
+              top: 10px
+        .sent
+          align-self: flex-end
+          margin: 5px
+          max-width: 80%
+          .seen-indicator
+            margin-right: 15px
+          .message
+            border-radius: 4px
+            background-color: #0c4b87
+            padding: 10px
+            color: #ffffff
+            position: relative
+            margin-right: 15px
+            &:after
+              content: ''
+              display: block
+              border-top: 10px solid transparent
+              border-bottom: 10px solid transparent
+              border-left: 7px solid #0c4b87
+              position: absolute
+              right: -7px
+              top: 10px
+      .input-message
+        display: flex
+        flex: 1
+        flex-direction: row
+        padding: 5px 0
+        border-top: 1px solid #e5e5e5
+        .input
+          display: flex
+          flex: 9
+          align-items: center
+          justify-content: center
+          .input-text, input[type=text]
+            width: 100%
+            border: 0
+            border-radius: 0
+        .send
+          display: flex
+          flex: 1
+          align-items: center
+          justify-content: center
+          border-left: 1px solid #e5e5e5
+          .icon
+            cursor: pointer
+            color: #0c4b87
+            opacity: 0.5
+            &:hover
+              opacity: 1

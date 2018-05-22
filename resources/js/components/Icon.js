@@ -27,7 +27,9 @@ class Icon extends React.Component {
       case 'follow':
         return <span className="fas fa-user-plus icon" />;
       case 'reload':
-        return <span className="fas fa-sync-alt" />;
+        return <span className="fas fa-sync-alt icon" />;
+      case 'send':
+        return <span className="fas fa-paper-plane icon" />;
     }
 
     return null;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Icon from '../Icon';
-import UnexpectedError from '../UnexpectedError';
-import chatActions from '../../redux/reducers/chat/actions';
+import Icon from './Icon';
+import InputText from './forms/InputText';
+import UnexpectedError from './UnexpectedError';
+import chatActions from '../redux/reducers/chat/actions';
 
 class ChatHeads extends React.Component {
   renderChatbody = chatHead => {
@@ -29,7 +30,41 @@ class ChatHeads extends React.Component {
       );
     }
 
-    return <p>Body of chat head</p>;
+    const messages = chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
+      const seen_ago = 'Seen: 15 minutes ago';
+
+      if (message.receiver_user_id == chatHead.user.user_id) {
+        return (
+          <div className="sent" key={message.private_chat_id}>
+            <p className="message">{message.body}</p>
+            <p className="seen-indicator">{seen_ago}</p>
+          </div>
+        );
+      }
+
+      return (
+        <div className="received" key={message.private_chat_id}>
+          <p className="message">{message.body}</p>
+          <p className="seen-indicator">{seen_ago}</p>
+        </div>
+      );
+    }) : <div className="loading"><p>There are no messages here.</p></div>;
+
+    return (
+      <div className="body-container">
+        <div className="chat-messages">{messages}</div>
+        <div className="input-message">
+          <div className="input">
+            <InputText
+              placeholder="Your message..."
+              value=""
+              onChange={({ value }) => console.log(value)}
+            />
+          </div>
+          <a className="send"><Icon name="send" /></a>
+        </div>
+      </div>
+    );
   }
 
   renderChatHeads = () => {
