@@ -17,9 +17,8 @@ Chat with people is a social networking application.
 - Email verification (I used [mailtrap](https://mailtrap.io/))
 - Sign in.
 - Search for users (name, email, or username).
-- Initiate chat with other users.
-- Add other users to the conversation to create a group chat.
-- You can even chat yourself (if it makes you happy).
+- Initiate chat with other users. You can even chat yourself (if it makes you happy).
+- Create group chats and invite other users.
 
 # Technologies used
 
@@ -32,7 +31,7 @@ Chat with people is a social networking application.
 - Axios
 - Socket.io
 - GraphQL
-- JWT with JSRSASign
+- JWT
 - Sequelize
 - SASS
 - Smart-Input-Validator
@@ -107,19 +106,28 @@ Edit `src/config/nodemailer.js`. I use mailtrap to test my emails. It would look
 
 For more details, please checkout [nodemailer's documentation](https://nodemailer.com/smtp/).
 
-#### 1.5 Compile JavaScript and SASS
+#### 1.5 Run it
 
-To build for dev mode `npm run webpack`. To build for production mode, which is minified and uglified, `npm run webpack:production`.
+###### Dev
 
-#### 1.6 Run it
+```
+npm run webpack
+npm run start
+```
 
-To run in dev mode `npm run start`. To run in production mode `npm run start:production`.
+###### Production
+
+```
+npm run webpack:production
+npm run start:production
+```
 
 Now you can access the web interface via `localhost:3000`.
 
 # NPM Scripting
 
 - `npm run eslint` should run eslint against `resources/js` and `src/` folders.
+- `npm run build` should use `babel` to build all files in `src/` folder.
 
 # Clean up
 
