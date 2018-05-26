@@ -2,5 +2,7 @@ export default {
   setSession: 'SessionSetUser',
   clearSession: 'SessionClearUser',
   getSession: 'SessionGetUser',
-  clearRequest: 'SessionClearRequest'
+  clearRequest: 'SessionClearRequest',
+  setSocket: 'SessionSetSocket',
+  clearSocket: 'SessionClearSocket'
 };

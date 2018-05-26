@@ -4,6 +4,18 @@ import validator from 'smart-input-validator';
 import Errors from './Errors';
 
 class InputText extends React.Component {
+  handleKeyDown = keyDownEvent => {
+    const keyCode = keyDownEvent.keyCode || keyDownEvent.charCode;
+
+    if (keyCode == 13) {
+      if (this.props.shouldBreakLine && !this.props.shouldBreakLine(keyDownEvent)) {
+        keyDownEvent.preventDefault();
+
+        if (this.props.onEnterKeyPress) this.props.onEnterKeyPress();
+      }
+    }
+  }
+
   handleChange = changeEvent => {
     if (!this.props.disabled) {
       let errors = [];
@@ -27,15 +39,31 @@ class InputText extends React.Component {
 
   render () {
     const errors = this.props.errors && this.props.errors.length? <Errors errors={this.props.errors} /> : null;
+    let input = (
+      <input
+        placeholder={this.props.placeholder}
+        type={this.props.secured? 'password' : 'text'}
+        value={this.props.value}
+        onKeyDown={this.handleKeyDown}
+        onChange={this.handleChange}
+      />
+    );
 
-    return (
-      <div className="input-text">
-        <input
+    if (this.props.multiline) {
+      input = (
+        <textarea
           placeholder={this.props.placeholder}
           type={this.props.secured? 'password' : 'text'}
           value={this.props.value}
+          onKeyDown={this.handleKeyDown}
           onChange={this.handleChange}
         />
+      );
+    }
+
+    return (
+      <div className="input-text">
+        {input}
         {errors}
       </div>
     );
@@ -50,7 +78,10 @@ InputText.propTypes = {
   validationRules: PropTypes.string,
   validationMessages: PropTypes.objectOf(PropTypes.string),
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  shouldBreakLine: PropTypes.func,
+  onEnterKeyPress: PropTypes.func,
+  disabled: PropTypes.bool,
+  multiline: PropTypes.bool
 };
 
 InputText.defaultProps = {
@@ -61,7 +92,8 @@ InputText.defaultProps = {
   secured: false,
   validationRules: null,
   validationMessages: {},
-  disabled: false
+  disabled: false,
+  multiline: false
 };
 
 export default InputText;

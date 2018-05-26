@@ -27,6 +27,7 @@ export function createChatHead (state, action) {
         user: { ...action.payload },
         chatMessages: null,
         open: true,
+        message: '',
         request: {
           pending: true,
           error: false

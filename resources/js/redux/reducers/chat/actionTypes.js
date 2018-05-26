@@ -3,5 +3,9 @@ export default {
   removeChatHead: 'ChatChatHeadRemove',
   checkedMessages: 'ChatChatHeadCheckedMessages',
   checkMessages: 'ChatChatHeadCheckMessages',
-  toggleChatBody: 'ChatChatBodyToggle'
+  toggleChatBody: 'ChatChatBodyToggle',
+  editMessage: 'ChatChatBodyEditMessage',
+  sendMessage: 'ChatMessageSend',
+  sendMessageSuccessful: 'ChatMessageSendSuccessful',
+  sendMessageFailed: 'ChatMessageSendFailed',
 };

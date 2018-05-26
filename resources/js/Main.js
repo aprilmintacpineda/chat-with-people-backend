@@ -9,6 +9,7 @@ import rootReducer from './redux/reducers';
 import createReduxSagaMiddleware from 'redux-saga';
 import rootSaga from './redux/sagas';
 import axios from 'axios';
+import SocketIO from 'socket.io-client';
 
 axios.interceptors.request.use(config => {
   return {
@@ -26,6 +27,7 @@ const store = createStore(rootReducer, applyMiddleware(
 ));
 reduxSagaMiddleware.run(rootSaga);
 const browserHistory = createBrowserHistory();
+const io = SocketIO('http://localhost:3000');
 
 export default class App extends React.Component {
   render () {
@@ -39,7 +41,10 @@ export default class App extends React.Component {
                   key={i}
                   exact={route.exact || false}
                   path={route.path}
-                  component={route.component}
+                  component={props => route.component({
+                    ...props,
+                    socket: io
+                  })}
                 />
               )
             }

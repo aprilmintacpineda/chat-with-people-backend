@@ -4,9 +4,25 @@ import PropTypes from 'prop-types';
 import Icon from './Icon';
 import InputText from './forms/InputText';
 import UnexpectedError from './UnexpectedError';
+import { generateUID } from '../Utils';
 import chatActions from '../redux/reducers/chat/actions';
 
 class ChatHeads extends React.Component {
+  sendMessage = (message, user_id) => {
+    const token = localStorage.getItem('token');
+    const temp_id = generateUID(20);
+
+    this.props.sendMessage({
+      payload: {
+        message,
+        temp_id,
+        user_id
+      }
+    });
+
+    this.props.sessionState.socket.emit('sendChatMessage', { message, user_id, token });
+  }
+
   renderChatbody = chatHead => {
     if (chatHead.request.pending) {
       return (
@@ -31,19 +47,27 @@ class ChatHeads extends React.Component {
     }
 
     const messages = chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
-      const seen_ago = 'Seen: 15 minutes ago';
+      let seen_ago = null;
+      let className = '';
+
+      if (message.send_pending) {
+        seen_ago = (
+          <span>
+            <Icon name="loading" /> Sending...
+          </span>
+        );
+
+        className = 'pending ';
+      }
 
       if (message.receiver_user_id == chatHead.user.user_id) {
-        return (
-          <div className="sent" key={message.private_chat_id}>
-            <p className="message">{message.body}</p>
-            <p className="seen-indicator">{seen_ago}</p>
-          </div>
-        );
+        className += 'sent ';
+      } else {
+        className += 'received ';
       }
 
       return (
-        <div className="received" key={message.private_chat_id}>
+        <div className={className.trim()} key={message.private_chat_id}>
           <p className="message">{message.body}</p>
           <p className="seen-indicator">{seen_ago}</p>
         </div>
@@ -54,14 +78,22 @@ class ChatHeads extends React.Component {
       <div className="body-container">
         <div className="chat-messages">{messages}</div>
         <div className="input-message">
-          <div className="input">
+          <div className="input" title="Type your message here">
             <InputText
-              placeholder="Your message..."
-              value=""
-              onChange={({ value }) => console.log(value)}
+              placeholder="Enter : message. Shift + Enter : new line"
+              value={chatHead.message}
+              multiline={true}
+              shouldBreakLine={event => event.shiftKey}
+              onEnterKeyPress={() => this.sendMessage(chatHead.message, chatHead.user.user_id)}
+              onChange={({ value }) => this.props.editMessage({
+                payload: {
+                  value,
+                  user_id: chatHead.user.user_id
+                }
+              })}
             />
           </div>
-          <a className="send"><Icon name="send" /></a>
+          <a className="send" title="Click to send your message"><Icon name="send" /></a>
         </div>
       </div>
     );
@@ -87,7 +119,7 @@ class ChatHeads extends React.Component {
           <div className="chat-head-container">
             <img
               onClick={() => this.props.toggleChatBody({ payload: i })}
-              src="https://avatars1.githubusercontent.com/u/21032419?s=400&u=a2b67668181c7fd4220bc2be2f74e2e9cfd8a721&v=4"
+              src="/public/images/me.jpg"
               title={chatHead.user.fullname}
             />
             <div
@@ -115,13 +147,17 @@ class ChatHeads extends React.Component {
 
 ChatHeads.propTypes = {
   chatState: PropTypes.object.isRequired,
+  sessionState: PropTypes.object.isRequired,
   checkMessages: PropTypes.func.isRequired,
   toggleChatBody: PropTypes.func.isRequired,
-  removeChatHead: PropTypes.func.isRequired
+  removeChatHead: PropTypes.func.isRequired,
+  editMessage: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired
 };
 
 export default connect(store => ({
-  chatState: { ...store.chat }
+  chatState: { ...store.chat },
+  sessionState: { ...store.session }
 }), {
   ...chatActions
 })(ChatHeads);
