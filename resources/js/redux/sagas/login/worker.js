@@ -14,6 +14,7 @@ export default function* ({ payload }) {
       const { data } = yield call(axios.post, '/api/login', `
         query {
           loginUser (${loginFields}) {
+            user_id,
             fullname,
             username,
             sex,
@@ -36,8 +37,8 @@ export default function* ({ payload }) {
       yield put(sessionActions.setSession({
         payload: {
           user: {
+            user_id: data.data.loginUser.user_id,
             username: data.data.loginUser.username,
-            email: data.data.loginUser.email,
             sex: data.data.loginUser.sex,
             fullname: data.data.loginUser.fullname
           },
@@ -57,6 +58,8 @@ export default function* ({ payload }) {
         }
       }));
     } catch (e) {
+      console.log(e);
+
       yield put(loginActions.formSubmitted());
       yield put(msgBoxActions.dialogue({
         payload: 'An unexpected error occured. Please try again.'

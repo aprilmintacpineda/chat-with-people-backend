@@ -8,6 +8,18 @@ import { generateUID } from '../Utils';
 import chatActions from '../redux/reducers/chat/actions';
 
 class ChatHeads extends React.Component {
+  componentDidMount () {
+    this.watchSocketEvents();
+  }
+
+  watchSocketEvents = () => {
+    if (!this.props.sessionState.socket) return;
+
+    this.props.sessionState.socket.on('sendChatMessageSuccessful', payload => this.props.sendMessageSuccessful({
+      payload
+    }));
+  }
+
   sendMessage = (message, user_id) => {
     const token = localStorage.getItem('token');
     const temp_id = generateUID(20);
@@ -20,7 +32,13 @@ class ChatHeads extends React.Component {
       }
     });
 
-    this.props.sessionState.socket.emit('sendChatMessage', { message, user_id, token });
+    this.props.sessionState.socket.emit('sendChatMessage', {
+      message,
+      user_id,
+      temp_id,
+      token,
+      user: { ...this.props.sessionState.user }
+    });
   }
 
   renderChatbody = chatHead => {
@@ -46,24 +64,33 @@ class ChatHeads extends React.Component {
       );
     }
 
-    const messages = chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
+    const messages = chatHead.chatMessages && chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
       let seen_ago = null;
       let className = '';
 
-      if (message.send_pending) {
-        seen_ago = (
-          <span>
-            <Icon name="loading" /> Sending...
-          </span>
-        );
-
-        className = 'pending ';
-      }
-
       if (message.receiver_user_id == chatHead.user.user_id) {
         className += 'sent ';
+
+        if (message.send_pending) {
+          seen_ago = (
+            <span>
+              <Icon name="loading" /> Sending...
+            </span>
+          );
+
+          className = 'pending ';
+        } else if (!message.seen_at) {
+          seen_ago = (
+            <span>
+              <Icon name="check-circled" /> Sent: 10 minutes ago
+            </span>
+          );
+        } else {
+          seen_ago = 'Seen: 10 minutes ago';
+        }
       } else {
         className += 'received ';
+        seen_ago = 'Received: 10 minutes ago'
       }
 
       return (
@@ -102,14 +129,22 @@ class ChatHeads extends React.Component {
   renderChatHeads = () => {
     return this.props.chatState.chatHeads.map((chatHead, i) => {
       let chatBody = null;
-
       if (chatHead.open) {
         chatBody = (
-          <div>
-            <span className="indicator" />
+          <div className="chat-head-wrapper">
+            <span className="chat-body-arrow-down" />;
             <div className="body">
               {this.renderChatbody(chatHead)}
             </div>
+          </div>
+        );
+      }
+
+      let unseenChatMessagesCount = null;
+      if (chatHead.unseenChatMessagesCount) {
+        unseenChatMessagesCount = (
+          <div className="unseen-chat-messages-count">
+            {chatHead.unseenChatMessagesCount}
           </div>
         );
       }
@@ -119,7 +154,7 @@ class ChatHeads extends React.Component {
           <div className="chat-head-container">
             <img
               onClick={() => this.props.toggleChatBody({ payload: i })}
-              src="/public/images/me.jpg"
+              src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png"
               title={chatHead.user.fullname}
             />
             <div
@@ -129,6 +164,7 @@ class ChatHeads extends React.Component {
             >
               <Icon name="close" />
             </div>
+            {unseenChatMessagesCount}
           </div>
           {chatBody}
         </div>

@@ -25,6 +25,14 @@
       opacity: 0
       &:hover
         opacity: 1
+    .unseen-chat-messages-count
+      position: absolute
+      top: 0
+      right: 0
+      padding: 2px
+      font-weight: bold
+      color: #ffffff
+      background-color: #ff0000
   .chat-head
     position: relative
     margin-right: 10px
@@ -34,8 +42,11 @@
       border: 1px solid #0c4b87
       border-radius: 100%
       cursor: pointer
-    .indicator
-      display: block
+    .chat-head-wrapper
+      position: absolute
+      top: 0
+      width: 100%
+    .chat-body-arrow-down
       border-left: 10px solid transparent
       border-right: 10px solid transparent
       border-top: 10px solid #0c4b87
@@ -59,23 +70,28 @@
       display: flex
       flex: 1
       flex-direction: column
+      overflow: hidden
       .chat-messages
         display: flex
         flex: 7
         flex-direction: column
         overflow: auto
+        p
+          display: inline-block
         .pending
           opacity: 0.6
         .seen-indicator
-          text-align: right
           font-size: 14px
           color: gray
+          margin-top: 2px
+          display: block
         .received
           align-self: flex-start
           margin: 5px
           max-width: 80%
           .seen-indicator
             margin-left: 15px
+            text-align: left
           .message
             border-radius: 4px
             background-color: #d3d3d3
@@ -92,11 +108,14 @@
               left: -7px
               top: 10px
         .sent
+          display: flex
+          flex-direction: column
           align-self: flex-end
           margin: 5px
           max-width: 80%
           .seen-indicator
             margin-right: 15px
+            text-align: right
           .message
             border-radius: 4px
             background-color: #0c4b87
@@ -104,6 +123,7 @@
             color: #ffffff
             position: relative
             margin-right: 15px
+            align-self: flex-end
             &:after
               content: ''
               display: block

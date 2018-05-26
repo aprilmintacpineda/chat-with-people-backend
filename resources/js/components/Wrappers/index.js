@@ -5,14 +5,36 @@ import Redirect from './Redirect';
 import PropTypes from 'prop-types';
 import Session from './Session';
 import sessionActions from '../../redux/reducers/session/actions';
+import chatActions from '../../redux/reducers/chat/actions';
 
 class Wrappers extends React.Component {
   componentDidMount () {
+    this.chatSound = new Audio('https://notificationsounds.com/soundfiles/a86c450b76fb8c371afead6410d55534/file-sounds-1108-slow-spring-board.mp3');
+
     if (this.props.socket && !this.props.sessionState.socket) {
       this.props.setSocket({
         payload: this.props.socket
       });
     }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (!prevProps.sessionState.user && this.props.sessionState.user) this.userHasLoggedIn();
+  }
+
+  userHasLoggedIn = () => {
+    const token = localStorage.getItem('token');
+    this.props.sessionState.socket.emit('login', { token });
+
+    this.props.sessionState.socket.on('receivedChatMessage', payload => {
+      if (payload.user.user_id != this.props.sessionState.user.user_id) {
+        this.props.receivedMessage({
+          payload: { ...payload }
+        });
+        this.chatSound.volume = 1;
+        this.chatSound.play();
+      }
+    });
   }
 
   render () {
@@ -36,5 +58,6 @@ Wrappers.propTypes = {
 export default connect(store => ({
   sessionState: { ...store.session }
 }), {
-  ...sessionActions
+  ...sessionActions,
+  ...chatActions
 })(Wrappers);

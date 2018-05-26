@@ -11,7 +11,9 @@ export default {
   },
   resolve (obj, args) {
     return new Promise((resolve, reject) => {
-      const userData = jsonwebtoken.decode(args.token);
+      const userData = jsonwebtoken.verify(args.token, secret);
+
+      if (!userData) return reject();
 
       if (Date.now() >= userData.exp * 1000) return reject();
 

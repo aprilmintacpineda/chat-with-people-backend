@@ -8,6 +8,7 @@ export default function* ({ payload }) {
       const { data } = yield call(axios.post, '/api', `
         query {
           getSession (token: "${payload.token}") {
+            user_id,
             fullname,
             username,
             sex,
@@ -27,8 +28,8 @@ export default function* ({ payload }) {
       yield put(sessionActions.setSession({
         payload: {
           user: {
+            user_id: data.data.getSession.user_id,
             username: data.data.getSession.username,
-            email: data.data.getSession.email,
             sex: data.data.getSession.sex,
             fullname: data.data.getSession.fullname
           },

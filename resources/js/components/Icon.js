@@ -30,6 +30,10 @@ class Icon extends React.Component {
         return <span className="fas fa-sync-alt icon" />;
       case 'send':
         return <span className="fas fa-paper-plane icon" />;
+      case 'check-circled':
+        return <span className="fas fa-check-circle icon" />;
+      case 'check':
+        return <span className="fas fa-check icon" />;
     }
 
     return null;

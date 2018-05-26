@@ -8,7 +8,7 @@ export default function* ({ payload }) {
 
     const { data } = yield call(axios.post, '/api', `
       query {
-        getMessages (user_id: "${payload.user_id}") {
+        getMessages (user_id: "${payload.user.user_id}") {
           private_chat_id
           receiver_user_id
           sender_user_id
@@ -25,14 +25,14 @@ export default function* ({ payload }) {
 
     yield put(chatActions.checkedMessages({
       payload: {
-        user_id: payload.user_id,
+        user_id: payload.user.user_id,
         chatMessages: [ ...data.data.getMessages ]
       }
     }));
   } catch (e) {
     yield put(chatActions.checkedMessages({
       payload: {
-        user_id: payload.user_id
+        user_id: payload.user.user_id
       }
     }));
   }

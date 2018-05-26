@@ -3,6 +3,7 @@ import expressJWT from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import http from 'http';
 import SocketIO from 'socket.io';
+import jsonwebtoken from 'jsonwebtoken';
 import graphqlSchema from './graphql/schema';
 import secret from './secret';
 import socketEvents from './sockets';
@@ -40,8 +41,21 @@ let users = {};
 
 io.on('connection', socket => {
   socketEvents.forEach(socketEvent => {
+    console.log(socketEvent.event);
+
     socket.on(socketEvent.event, (payload = {}) => {
-      socketEvent.handler(payload, users);
+      try {
+        const userData = jsonwebtoken.verify(payload.token, secret);
+        socketEvent.handler({
+          ...payload,
+          userData
+        }, users, socket);
+      } catch (e) {
+        // don't handle this request
+        console.log('###### START SOCKET_EVENT_ERROR');
+        console.log(e);
+        console.log('###### END SOCKET_EVENT_ERROR');
+      }
     });
   });
 });

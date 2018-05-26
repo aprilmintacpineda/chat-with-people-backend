@@ -8,4 +8,5 @@ export default {
   sendMessage: 'ChatMessageSend',
   sendMessageSuccessful: 'ChatMessageSendSuccessful',
   sendMessageFailed: 'ChatMessageSendFailed',
+  receivedMessage: 'ChatMessageReceived'
 };

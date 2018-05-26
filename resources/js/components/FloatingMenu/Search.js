@@ -10,7 +10,9 @@ import chatActions from '../../redux/reducers/chat/actions';
 class Search extends React.Component {
   chatWith = result => {
     this.props.createChatHead({
-      payload: { ...result }
+      payload: {
+        user: { ...result }
+      }
     });
 
     this.props.editSearchString({
