@@ -147,7 +147,9 @@ class ChatHeads extends React.Component {
 
     return (
       <div className="body-container">
-        <div className="chat-messages">{messages}</div>
+        <div className="chat-messages-container">
+          {messages}
+        </div>
         <div className="input-message">
           <div className="input" title="Type your message here">
             <InputText
