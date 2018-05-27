@@ -6,17 +6,34 @@ export default {
     },
     username: {
       type: Sequelize.STRING(20),
-      unique: true
+      unique: true,
+      allowNull: false
     },
     email: {
       type: Sequelize.STRING(255),
-      unique: true
+      unique: true,
+      allowNull: false
     },
-    password: Sequelize.STRING(255),
-    fullname: Sequelize.STRING(70),
-    sex: Sequelize.STRING(6),
-    confirm_token: Sequelize.STRING(20),
-    created_at: Sequelize.BIGINT(20),
+    password: {
+      type: Sequelize.STRING(255),
+      allowNull: false
+    },
+    fullname: {
+      type: Sequelize.STRING(70),
+      allowNull: false
+    },
+    sex: {
+      type: Sequelize.STRING(6),
+      allowNull: false
+    },
+    confirm_token: {
+      type: Sequelize.STRING(20),
+      allowNull: false
+    },
+    created_at: {
+      type: Sequelize.BIGINT(20),
+      allowNull: false
+    },
     confirmed_at: {
       type: Sequelize.BIGINT(20),
       allowNull: true

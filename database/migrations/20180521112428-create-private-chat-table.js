@@ -1,10 +1,25 @@
 export default {
   up: (queryInterface, Sequelize) => queryInterface.createTable('private_chat', {
-    private_chat_id: Sequelize.STRING(20),
-    receiver_user_id: Sequelize.STRING(20),
-    sender_user_id: Sequelize.STRING(20),
-    body: Sequelize.TEXT,
-    created_at: Sequelize.BIGINT(20),
+    private_chat_id: {
+      type: Sequelize.STRING(20),
+      primaryKey: true
+    },
+    receiver_user_id: {
+      type: Sequelize.STRING(20),
+      allowNull: false
+    },
+    sender_user_id: {
+      type: Sequelize.STRING(20),
+      allowNull: false
+    },
+    body: {
+      type: Sequelize.TEXT,
+      allowNull: false
+    },
+    created_at: {
+      type: Sequelize.BIGINT(20),
+      allowNull: false
+    },
     seen_at: {
       type: Sequelize.BIGINT(20),
       allowNull: true
