@@ -12,6 +12,9 @@
     justify-content: center
     align-items: center
     text-align: center
+  .loading-old-messages
+    align-self: center
+    padding: 10px
   .chat-head-container
     &:hover
       .close-btn
@@ -85,6 +88,9 @@
           color: gray
           margin-top: 2px
           display: block
+        .message-body
+          display: flex
+          flex-direction: column
         .received
           align-self: flex-start
           margin: 5px
@@ -98,6 +104,7 @@
             padding: 10px
             position: relative
             margin-left: 15px
+            align-self: flex-start
             &:after
               content: ''
               display: block
@@ -108,11 +115,9 @@
               left: -7px
               top: 10px
         .sent
-          display: flex
-          flex-direction: column
-          align-self: flex-end
           margin: 5px
           max-width: 80%
+          align-self: flex-end
           .seen-indicator
             margin-right: 15px
             text-align: right

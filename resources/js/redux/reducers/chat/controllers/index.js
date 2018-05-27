@@ -1,6 +1,7 @@
 import actionTypes from '../actionTypes';
 import { createChatHead, removeChatHead } from './chatHeads';
 import {
+  checkMessages,
   checkedMessages,
   editMessage,
   sendMessage,
@@ -13,6 +14,7 @@ import { toggleChatBody } from './chatBody';
 export default {
   [actionTypes.createChatHead]: createChatHead,
   [actionTypes.removeChatHead]: removeChatHead,
+  [actionTypes.checkMessages]: checkMessages,
   [actionTypes.checkedMessages]: checkedMessages,
   [actionTypes.toggleChatBody]: toggleChatBody,
   [actionTypes.editMessage]: editMessage,

@@ -1,3 +1,20 @@
+export function checkMessages (state, action) {
+  return {
+    ...state,
+    chatHeads: state.chatHeads.map(chatHead => {
+      if (chatHead.user.user_id != action.payload.user.user_id) return { ...chatHead };
+
+      return {
+        ...chatHead,
+        request: {
+          pending: true,
+          error: false
+        }
+      };
+    })
+  };
+}
+
 export function checkedMessages (state, action) {
   return {
     ...state,
@@ -75,6 +92,7 @@ export function receivedMessage (state, action) {
           chatMessages: [
             { ...action.payload.message }
           ],
+          shouldCheckMessages: true,
           unseenChatMessagesCount: 1,
           message: '',
           request: {

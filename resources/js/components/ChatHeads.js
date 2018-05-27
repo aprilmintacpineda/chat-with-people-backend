@@ -12,6 +12,18 @@ class ChatHeads extends React.Component {
     this.watchSocketEvents();
   }
 
+  componentDidUpdate () {
+    this.props.chatState.chatHeads.forEach(chatHead => {
+      if (chatHead.shouldCheckMessages && !chatHead.request.pending) {
+        this.props.checkMessages({
+          payload: {
+            user: { ...chatHead.user }
+          }
+        });
+      }
+    });
+  }
+
   watchSocketEvents = () => {
     if (!this.props.sessionState.socket) return;
 
@@ -42,7 +54,8 @@ class ChatHeads extends React.Component {
   }
 
   renderChatbody = chatHead => {
-    if (chatHead.request.pending) {
+    if (chatHead.request.pending
+      && (!chatHead.chatMessages || !chatHead.chatMessages.length)) {
       return (
         <div className="loading">
           <Icon name="loading" />
@@ -56,7 +69,7 @@ class ChatHeads extends React.Component {
           <UnexpectedError
             onClick={() => this.props.checkMessages({
               payload: {
-                user_id: chatHead.user.user_id
+                user: { ...chatHead.user }
               }
             })}
           />
@@ -95,15 +108,25 @@ class ChatHeads extends React.Component {
 
       return (
         <div className={className.trim()} key={message.private_chat_id}>
-          <p className="message">{message.body}</p>
+          <div className="message-body">
+            <p className="message">{message.body}</p>
+          </div>
           <p className="seen-indicator">{seen_ago}</p>
         </div>
       );
     }) : <div className="loading"><p>There are no messages here.</p></div>;
 
+    if (chatHead.chatMessages.length && chatHead.request.pending) {
+      messages.unshift(
+        <div key="loading-old-messages" className="loading-old-messages">
+          <Icon name="loading" /> Loading older messages...
+        </div>
+      );
+    }
+
     return (
       <div className="body-container">
-        <div className="chat-messages">{messages}</div>
+        <div className="chat-messages" ref={o => console.log(o)}>{messages}</div>
         <div className="input-message">
           <div className="input" title="Type your message here">
             <InputText
