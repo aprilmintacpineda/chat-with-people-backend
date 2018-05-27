@@ -27,7 +27,8 @@
     "sequelize-cli": "^4.0.0",
     "smart-input-validator": "^1.1.10",
     "socket.io": "^2.1.1",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "timeago.js": "^3.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^8.5.0",

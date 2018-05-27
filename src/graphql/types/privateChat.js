@@ -7,7 +7,7 @@ export default new GraphQLObjectType({
     receiver_user_id: { type: GraphQLString },
     sender_user_id: { type: GraphQLString },
     body: { type: GraphQLString },
-    created_at: { type: GraphQLInt },
-    seen_at: { type: GraphQLInt }
+    created_at: { type: GraphQLString },
+    seen_at: { type: GraphQLString }
   }
 });

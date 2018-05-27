@@ -26,6 +26,7 @@ export function checkedMessages (state, action) {
         chatMessages: action.payload.chatMessages
         ? [ ...action.payload.chatMessages ]
         : null,
+        shouldCheckMessages: false,
         request: {
           pending: false,
           error: !action.payload.chatMessages? true : false
@@ -75,8 +76,8 @@ export function receivedMessage (state, action) {
         unseenChatMessagesCount: chatHead.unseenChatMessagesCount + 1,
         message: '',
         chatMessages: [
-          ...chatHead.chatMessages,
-          { ...action.payload.message }
+          { ...action.payload.message },
+          ...chatHead.chatMessages
         ]
       };
     })
@@ -117,7 +118,6 @@ export function sendMessage (state, action) {
         ...chatHead,
         message: '',
         chatMessages: [
-          ...chatHead.chatMessages,
           {
             private_chat_id: action.payload.temp_id,
             receiver_user_id: action.payload.user_id,
@@ -125,7 +125,8 @@ export function sendMessage (state, action) {
             created_at: Date.now(),
             send_pending: true,
             send_failed: false
-          }
+          },
+          ...chatHead.chatMessages
         ]
       };
     })

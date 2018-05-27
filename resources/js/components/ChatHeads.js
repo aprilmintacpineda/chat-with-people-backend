@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import TimeAgoJS from 'timeago.js';
 import Icon from './Icon';
 import InputText from './forms/InputText';
 import UnexpectedError from './UnexpectedError';
@@ -80,30 +81,36 @@ class ChatHeads extends React.Component {
     const messages = chatHead.chatMessages && chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
       let seen_ago = null;
       let className = '';
+      const timeAgo = TimeAgoJS();
+      let timeLapsed = timeAgo.format(
+        new Date(parseInt(message.created_at))
+      );
 
       if (message.receiver_user_id == chatHead.user.user_id) {
         className += 'sent ';
 
         if (message.send_pending) {
+          className = 'pending ';
           seen_ago = (
             <span>
               <Icon name="loading" /> Sending...
             </span>
           );
-
-          className = 'pending ';
         } else if (!message.seen_at) {
+          seen_ago = `${timeLapsed}`;
+        } else {
+          timeLapsed = timeAgo.format(
+            new Date(parseInt(message.seen_at))
+          );
           seen_ago = (
             <span>
-              <Icon name="check-circled" /> Sent: 10 minutes ago
+              <Icon name="check-circled" /> Seen: {timeLapsed}
             </span>
           );
-        } else {
-          seen_ago = 'Seen: 10 minutes ago';
         }
       } else {
         className += 'received ';
-        seen_ago = 'Received: 10 minutes ago'
+        seen_ago = `${timeLapsed}`;
       }
 
       return (
@@ -117,7 +124,7 @@ class ChatHeads extends React.Component {
     }) : <div className="loading"><p>There are no messages here.</p></div>;
 
     if (chatHead.chatMessages.length && chatHead.request.pending) {
-      messages.unshift(
+      messages.push(
         <div key="loading-old-messages" className="loading-old-messages">
           <Icon name="loading" /> Loading older messages...
         </div>
@@ -126,8 +133,8 @@ class ChatHeads extends React.Component {
 
     return (
       <div className="body-container">
-        <div className="chat-messages" ref={o => console.log(o)}>{messages}</div>
-        <div className="input-message">
+        <div className="chat-messages">{messages}</div>
+            <div className="input-message">
           <div className="input" title="Type your message here">
             <InputText
               placeholder="Enter : message. Shift + Enter : new line"
