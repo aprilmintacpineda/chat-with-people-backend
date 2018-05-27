@@ -137,7 +137,7 @@ export function sendMessageSuccessful (state, action) {
   return {
     ...state,
     chatHeads: state.chatHeads.map(chatHead => {
-      if (chatHead.user.user_id == action.payload.user_id) return { ...chatHead };
+      if (chatHead.user.user_id != action.payload.user_id) return { ...chatHead };
 
       return {
         ...chatHead,
@@ -157,6 +157,8 @@ export function sendMessageSuccessful (state, action) {
 }
 
 export function sendMessageFailed (state, action) {
+  console.log('you have not handled the sendMessageFailed yet!');
+
   return {
     ...state,
     chatHeads: state.chatHeads.map(chatHead => {
@@ -172,6 +174,43 @@ export function sendMessageFailed (state, action) {
             ...chatMessage,
             send_pending: false,
             send_failed: true
+          };
+        })
+      };
+    })
+  }
+}
+
+export function openedMessages (state, action) {
+  return {
+    ...state,
+    chatHeads: state.chatHeads.map(chatHead => {
+      if (chatHead.user.user_id != action.payload.user_id) return { ...chatHead };
+
+      return {
+        ...chatHead,
+        unseenChatMessagesCount: 0
+      };
+    })
+  }
+}
+
+export function seenMessages (state, action) {
+  return {
+    ...state,
+    chatHeads: state.chatHeads.map(chatHead => {
+      if (chatHead.user.user_id != action.payload.user_id) return { ...chatHead };
+
+      return {
+        ...chatHead,
+        unseenChatMessagesCount: 0,
+        message: '',
+        chatMessages: chatHead.chatMessages.map(chatMessage => {
+          if (chatMessage.seen_at) return { ...chatMessage };
+
+          return {
+            ...chatMessage,
+            seen_at: action.payload.seen_at
           };
         })
       };

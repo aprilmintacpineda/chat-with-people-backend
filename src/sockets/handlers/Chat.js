@@ -22,7 +22,8 @@ class ChatSocketHandler {
       if (users[payload.userData.user_id]) {
         users[payload.userData.user_id].emit('sendChatMessageSuccessful', {
           message,
-          temp_id: payload.temp_id
+          temp_id: payload.temp_id,
+          user_id: payload.user_id
         });
       }
 
@@ -32,6 +33,29 @@ class ChatSocketHandler {
           user: payload.user
         });
       }
+    });
+  }
+
+  seenMessages = (payload, users) => {
+    console.log('seenMessages');
+
+    const seen_at = Date.now();
+
+    return sequelize.query(`
+      update private_chat set seen_at = :seen_at where seen_at is null and receiver_user_id = :receiver_user_id and sender_user_id = :sender_user_id
+    `, {
+      replacements: {
+        seen_at,
+        receiver_user_id: payload.userData.user_id,
+        sender_user_id: payload.user_id
+      },
+      type: sequelize.QueryTypes.UPDATE
+    })
+    .then(() => {
+      if (users[payload.user_id]) users[payload.user_id].emit('seenChatMessages', {
+        seen_at,
+        user_id: payload.userData.user_id
+      });
     });
   }
 }

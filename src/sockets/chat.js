@@ -4,5 +4,9 @@ export default [
   {
     event: 'sendChatMessage',
     handler: Chat.sendMessage
+  },
+  {
+    event: 'seenChatMessages',
+    handler: Chat.seenMessages
   }
 ];

@@ -35,6 +35,10 @@ class Wrappers extends React.Component {
         this.chatSound.play();
       }
     });
+
+    this.props.sessionState.socket.on('seenChatMessages', payload => {
+      this.props.seenMessages({ payload });
+    });
   }
 
   render () {

@@ -7,7 +7,9 @@ import {
   sendMessage,
   sendMessageSuccessful,
   sendMessageFailed,
-  receivedMessage
+  receivedMessage,
+  seenMessages,
+  openedMessages
 } from './chatMessages';
 import { toggleChatBody } from './chatBody';
 
@@ -21,5 +23,7 @@ export default {
   [actionTypes.sendMessage]: sendMessage,
   [actionTypes.sendMessageSuccessful]: sendMessageSuccessful,
   [actionTypes.sendMessageFailed]: sendMessageFailed,
-  [actionTypes.receivedMessage]: receivedMessage
+  [actionTypes.receivedMessage]: receivedMessage,
+  [actionTypes.seenMessages]: seenMessages,
+  [actionTypes.openedMessages]: openedMessages
 };

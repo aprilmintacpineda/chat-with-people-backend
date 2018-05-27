@@ -13,12 +13,26 @@ class ChatHeads extends React.Component {
     this.watchSocketEvents();
   }
 
-  componentDidUpdate () {
-    this.props.chatState.chatHeads.forEach(chatHead => {
+  componentDidUpdate (prevProps) {
+    this.props.chatState.chatHeads.forEach((chatHead, i) => {
       if (chatHead.shouldCheckMessages && !chatHead.request.pending) {
         this.props.checkMessages({
           payload: {
             user: { ...chatHead.user }
+          }
+        });
+      }
+
+      if (chatHead.open
+        && (!prevProps.chatState.chatHeads[i] || !prevProps.chatState.chatHeads[i].open)) {
+        this.props.sessionState.socket.emit('seenChatMessages', {
+          user_id: chatHead.user.user_id,
+          token: localStorage.getItem('token')
+        });
+
+        this.props.openedMessages({
+          payload: {
+            user_id: chatHead.user.user_id
           }
         });
       }
@@ -90,7 +104,7 @@ class ChatHeads extends React.Component {
         className += 'sent ';
 
         if (message.send_pending) {
-          className = 'pending ';
+          className += 'pending ';
           seen_ago = (
             <span>
               <Icon name="loading" /> Sending...
@@ -134,7 +148,7 @@ class ChatHeads extends React.Component {
     return (
       <div className="body-container">
         <div className="chat-messages">{messages}</div>
-            <div className="input-message">
+        <div className="input-message">
           <div className="input" title="Type your message here">
             <InputText
               placeholder="Enter : message. Shift + Enter : new line"
