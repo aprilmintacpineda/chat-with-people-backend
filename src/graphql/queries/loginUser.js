@@ -27,9 +27,9 @@ export default {
         },
         type: sequelize.QueryTypes.SELECT
       })
-      .then(([ user ]) => {
+      .then(([user]) => {
         if (!user || !PasswordHash.verify(validatedInputs.password.value, user.password)) {
-          return reject(JSON.stringify({ submitError: [ 'Email or password is incorrect.' ] }));
+          return reject(JSON.stringify({ submitError: ['Email or password is incorrect.'] }));
         }
 
         delete user.password;

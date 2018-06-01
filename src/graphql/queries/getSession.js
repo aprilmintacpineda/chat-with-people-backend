@@ -23,7 +23,7 @@ export default {
         },
         type: sequelize.QueryTypes.SELECT
       })
-      .then(([ user ]) => {
+      .then(([user]) => {
         if (!user) return reject();
 
         delete user.password;

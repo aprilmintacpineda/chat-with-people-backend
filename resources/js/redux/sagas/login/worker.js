@@ -9,7 +9,7 @@ import redirectActions from '../../reducers/redirect/actions';
 export default function* ({ payload }) {
   if (!payload.pending) {
     try {
-      const loginFields = yield select(getLoginFields, [ 'submitError' ]);
+      const loginFields = yield select(getLoginFields, ['submitError']);
 
       const { data } = yield call(axios.post, '/api/login', `
         query {

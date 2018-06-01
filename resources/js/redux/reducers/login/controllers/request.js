@@ -3,7 +3,7 @@ import { clearErrors } from '../../../../Utils';
 
 export function formSubmit (state) {
   return {
-    ...clearErrors(state, [ 'submitError' ]),
+    ...clearErrors(state, ['submitError']),
     request: {
       pending: true
     }

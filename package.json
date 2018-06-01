@@ -65,7 +65,7 @@
     "config:sequelize": "babel-node node_modules/.bin/sequelize init",
     "config:init": "npm run config:nodemailer && npm run config:sequelize",
     "create:migration": "babel-node node_modules/.bin/sequelize migration:generate",
-    "eslint": "node node_modules/eslint/bin/eslint.js --parser babel-eslint \"src/**\", \"resources/js/**\"",
+    "eslint": "node node_modules/eslint/bin/eslint.js --ext .js --parser babel-eslint src/** resources/js/** tests/**",
     "eslint-watch": "node node_modules/eslint-watch/bin/esw --parser babel-eslint \"src/**\", \"resources/js/**\" --watch",
     "build": "rm -rf build && npm run webpack:production && babel src --out-dir build --minified && cp -R src/config/sequelize.json build/config/sequelize.json && cp -R src/public build",
     "start:production": "npm run build && node build/server.js",

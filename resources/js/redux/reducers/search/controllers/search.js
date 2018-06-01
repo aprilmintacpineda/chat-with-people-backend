@@ -16,7 +16,7 @@ export function editSearchString (state, action) {
 export function showSearchResults (state, action) {
   return {
     ...state,
-    resultList: [ ...action.payload ],
+    resultList: [...action.payload],
     request: {
       pending: false,
       error: false

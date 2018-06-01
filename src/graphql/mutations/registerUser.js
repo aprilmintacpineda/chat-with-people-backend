@@ -36,7 +36,7 @@ export default {
           type: sequelize.QueryTypes.SELECT
         })
       ])
-      .then(([ [ QEmail ] , [ QUsername ] ]) => {
+      .then(([[QEmail] , [QUsername]]) => {
         if (QEmail.doesExist) validatedInputs.email.errors.push('Email is already registered.');
         if (QUsername.doesExist) validatedInputs.username.errors.push('Username is already taken.');
 

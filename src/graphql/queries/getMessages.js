@@ -30,7 +30,7 @@ export default {
           type: sequelize.QueryTypes.SELECT
         })
       ])
-      .then(([ chatMessages, otherUser ]) => resolve(chatMessages || []));
+      .then(([chatMessages, otherUser]) => resolve(chatMessages || []));
     });
   }
 };

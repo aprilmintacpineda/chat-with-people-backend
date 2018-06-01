@@ -26,7 +26,7 @@ export default function* ({ payload }) {
     yield put(chatActions.checkedMessages({
       payload: {
         user_id: payload.user.user_id,
-        chatMessages: [ ...data.data.getMessages ]
+        chatMessages: [...data.data.getMessages]
       }
     }));
   } catch (e) {

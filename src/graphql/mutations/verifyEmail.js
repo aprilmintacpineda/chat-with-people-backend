@@ -17,7 +17,7 @@ export default {
         },
         type: sequelize.QueryTypes.SELECT
       })
-      .then(([ QResult ]) => {
+      .then(([QResult]) => {
         if (!QResult.doesExist) throw new Error;
 
         return sequelize.query('update user set confirmed_at = :confirmed_at', {

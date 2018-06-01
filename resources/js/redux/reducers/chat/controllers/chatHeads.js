@@ -13,7 +13,7 @@ export function createChatHead (state, action) {
   if (exists) {
     return {
       ...state,
-      chatHeads: [ ...newChatHeads ]
+      chatHeads: [...newChatHeads]
     };
   }
 

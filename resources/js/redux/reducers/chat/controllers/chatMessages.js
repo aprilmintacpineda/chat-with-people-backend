@@ -24,7 +24,7 @@ export function checkedMessages (state, action) {
       return {
         ...chatHead,
         chatMessages: action.payload.chatMessages
-        ? [ ...action.payload.chatMessages ]
+        ? [...action.payload.chatMessages]
         : null,
         shouldCheckMessages: false,
         request: {
@@ -81,7 +81,7 @@ export function receivedMessage (state, action) {
         ]
       };
     })
-  }
+  };
 
   if (!exists) {
     newState = {
@@ -130,7 +130,7 @@ export function sendMessage (state, action) {
         ]
       };
     })
-  }
+  };
 }
 
 export function sendMessageSuccessful (state, action) {
@@ -153,7 +153,7 @@ export function sendMessageSuccessful (state, action) {
         })
       };
     })
-  }
+  };
 }
 
 export function sendMessageFailed (state, action) {
@@ -178,7 +178,7 @@ export function sendMessageFailed (state, action) {
         })
       };
     })
-  }
+  };
 }
 
 export function openedMessages (state, action) {
@@ -192,7 +192,7 @@ export function openedMessages (state, action) {
         unseenChatMessagesCount: 0
       };
     })
-  }
+  };
 }
 
 export function seenMessages (state, action) {
@@ -215,5 +215,5 @@ export function seenMessages (state, action) {
         })
       };
     })
-  }
+  };
 }
