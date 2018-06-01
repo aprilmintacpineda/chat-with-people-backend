@@ -20,7 +20,7 @@ const uglifyJsPlugin = process.env.PROD == 1? [
   })
 ] : [];
 
-const uglifyCssPlugin = process.env.PROD == 1? [ new OptimizeCssAssetsWebpackPlugin() ] : []
+const uglifyCssPlugin = process.env.PROD == 1? [new OptimizeCssAssetsWebpackPlugin()] : [];
 
 export default [
   {
