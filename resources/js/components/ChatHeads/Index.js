@@ -120,7 +120,7 @@ class ChatHeads extends React.Component {
     }
 
     const messages = chatHead.chatMessages && chatHead.chatMessages.length? chatHead.chatMessages.map((message, i) => {
-      let seen_ago = null;
+      let seenAgo = null;
       let className = '';
       const timeAgo = TimeAgoJS();
       let timeLapsed = timeAgo.format(
@@ -132,18 +132,18 @@ class ChatHeads extends React.Component {
 
         if (message.send_pending) {
           className += 'pending ';
-          seen_ago = (
+          seenAgo = (
             <span>
               <Icon name="loading" /> Sending...
             </span>
           );
         } else if (!message.seen_at) {
-          seen_ago = `${timeLapsed}`;
+          seenAgo = `${timeLapsed}`;
         } else {
           timeLapsed = timeAgo.format(
             new Date(parseInt(message.seen_at))
           );
-          seen_ago = (
+          seenAgo = (
             <span>
               <Icon name="check-circled" /> Seen: {timeLapsed}
             </span>
@@ -151,7 +151,7 @@ class ChatHeads extends React.Component {
         }
       } else {
         className += 'received ';
-        seen_ago = `${timeLapsed}`;
+        seenAgo = `${timeLapsed}`;
       }
 
       return (
@@ -159,7 +159,7 @@ class ChatHeads extends React.Component {
           <div className="message-body">
             <p className="message">{message.body}</p>
           </div>
-          <p className="seen-indicator">{seen_ago}</p>
+          <p className="seen-indicator">{seenAgo}</p>
         </div>
       );
     }) : <div className="loading"><p>There are no messages here.</p></div>;
@@ -186,7 +186,15 @@ class ChatHeads extends React.Component {
             <InputText
               ref={o => this.chatInputFields[chatHead.user.user_id] = o}
               callOnFocusIfFocused={true}
-              onFocus={() => this.seenMessage(chatHead)}
+              onFocus={() => {
+                this.seenMessage(chatHead);
+                this.iAmTyping(chatHead, chatHead.message.length > 0);
+              }}
+              onBlur={() => {
+                if (chatHead.message.length > 0) {
+                  this.iAmTyping(chatHead, false)
+                }
+              }}
               placeholder="Enter : message. Shift + Enter : new line"
               value={chatHead.message}
               multiline={true}
@@ -201,7 +209,6 @@ class ChatHeads extends React.Component {
                     user_id: chatHead.user.user_id
                   }
                 });
-
                 this.iAmTyping(chatHead, value.length > 0);
               }}
             />
