@@ -9,7 +9,7 @@ import chatActions from '../../redux/reducers/chat/actions';
 
 class Wrappers extends React.Component {
   componentDidMount () {
-    this.chatSound = new Audio('https://notificationsounds.com/soundfiles/a86c450b76fb8c371afead6410d55534/file-sounds-1108-slow-spring-board.mp3');
+    this.chatSound = new Audio('/public/chat-sound.mp3');
 
     if (this.props.socket && !this.props.sessionState.socket) {
       this.props.setSocket({

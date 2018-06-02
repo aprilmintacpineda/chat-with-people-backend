@@ -1,0 +1,26 @@
+{
+  "editor.fontSize": 15,
+  "editor.lineHeight": 40,
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    },
+    {
+      "language": "vue",
+      "autoFix": true
+    }
+  ],
+  "eslint.workingDirectories": [
+    "./src",
+    "./test"
+  ],
+  "eslint.alwaysShowStatus": true
+}

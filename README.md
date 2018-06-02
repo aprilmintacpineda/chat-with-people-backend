@@ -22,6 +22,7 @@ Chat with people is a social networking application.
 
 # Technologies used
 
+- WorkBox
 - ExpressJS
 - React-Dom
 - React-Native
@@ -117,8 +118,9 @@ npm run start
 
 ###### Production
 
+This command will both build the code and create a production server using the build codes.
+
 ```
-npm run webpack:production
 npm run start:production
 ```
 

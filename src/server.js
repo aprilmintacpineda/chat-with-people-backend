@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import expressJWT from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import http from 'http';
@@ -19,6 +20,16 @@ const pathsWithNoJWT = [
   '/api/register'
 ];
 
+express.static.mime.define({
+  'text/javascript': ['js'],
+  'text/html': ['html'],
+  'text/css': ['css'],
+  'application/x-compressed': ['gz'],
+  'application/json': ['json'],
+  'audio/mpeg': ['mp3']
+});
+
+app.use(compression());
 app.use('/public', express.static(publicDir));
 app.use('/webfonts', express.static(publicDir + '/webfonts'));
 app.use('/api', expressJWT({ secret }).unless({ path: pathsWithNoJWT }), expressGraphQL({
