@@ -37,8 +37,6 @@ class ChatSocketHandler {
   }
 
   seenMessages = (payload, users) => {
-    console.log('seenMessages');
-
     const seen_at = Date.now();
 
     return sequelize.query(`
@@ -52,11 +50,22 @@ class ChatSocketHandler {
       type: sequelize.QueryTypes.UPDATE
     })
     .then(() => {
-      if (users[payload.user_id]) users[payload.user_id].emit('seenChatMessages', {
-        seen_at,
-        user_id: payload.userData.user_id
-      });
+      if (users[payload.user_id]) {
+        users[payload.user_id].emit('seenChatMessages', {
+          seen_at,
+          user_id: payload.userData.user_id
+        });
+      }
     });
+  }
+
+  iAmTyping = (payload, users) => {
+    if (users[payload.user_id] && payload.user_id != payload.userData.user_id) {
+      users[payload.user_id].emit('otherUserIsTyping', {
+        user_id: payload.userData.user_id,
+        typing: payload.typing
+      });
+    }
   }
 }
 

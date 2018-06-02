@@ -27,6 +27,7 @@ export function createChatHead (state, action) {
         open: true,
         message: '',
         unseenChatMessagesCount: 0,
+        typing: false,
         request: {
           pending: true,
           error: false

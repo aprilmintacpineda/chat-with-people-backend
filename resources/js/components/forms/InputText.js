@@ -4,6 +4,10 @@ import validator from 'smart-input-validator';
 import Errors from './Errors';
 
 class InputText extends React.Component {
+  focus = () => {
+    this.inputField.focus();
+  }
+
   handleKeyDown = keyDownEvent => {
     const keyCode = keyDownEvent.keyCode || keyDownEvent.charCode;
 
@@ -41,6 +45,10 @@ class InputText extends React.Component {
     const errors = this.props.errors && this.props.errors.length? <Errors errors={this.props.errors} /> : null;
     let input = (
       <input
+        ref={o => this.inputField = o}
+        onFocus={this.props.onFocus || null}
+        onBlur={this.props.onBlur || null}
+        onScroll={this.props.onScroll || null}
         placeholder={this.props.placeholder}
         type={this.props.secured? 'password' : 'text'}
         value={this.props.value}
@@ -52,6 +60,9 @@ class InputText extends React.Component {
     if (this.props.multiline) {
       input = (
         <textarea
+          ref={o => this.inputField = o}
+          onFocus={this.props.onFocus || null}
+          onBlur={this.props.onBlur || null}
           placeholder={this.props.placeholder}
           type={this.props.secured? 'password' : 'text'}
           value={this.props.value}
@@ -81,7 +92,11 @@ InputText.propTypes = {
   shouldBreakLine: PropTypes.func,
   onEnterKeyPress: PropTypes.func,
   disabled: PropTypes.bool,
-  multiline: PropTypes.bool
+  multiline: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onScroll: PropTypes.func,
+  callOnFocusIfFocused: PropTypes.bool
 };
 
 InputText.defaultProps = {
@@ -93,7 +108,8 @@ InputText.defaultProps = {
   validationRules: null,
   validationMessages: {},
   disabled: false,
-  multiline: false
+  multiline: false,
+  callOnFocusIfFocused: false
 };
 
 export default InputText;

@@ -52,8 +52,6 @@ export function editMessage (state, action) {
 
 export function receivedMessage (state, action) {
   let exists = false;
-  let unseenChatMessagesCount = 0;
-
   let newState = {
     ...state,
     chatHeads: state.chatHeads.map(chatHead => {
@@ -76,8 +74,8 @@ export function receivedMessage (state, action) {
         unseenChatMessagesCount: chatHead.unseenChatMessagesCount + 1,
         message: '',
         chatMessages: [
-          { ...action.payload.message },
-          ...chatHead.chatMessages
+          ...chatHead.chatMessages,
+          { ...action.payload.message }
         ]
       };
     })
@@ -118,6 +116,7 @@ export function sendMessage (state, action) {
         ...chatHead,
         message: '',
         chatMessages: [
+          ...chatHead.chatMessages,
           {
             private_chat_id: action.payload.temp_id,
             receiver_user_id: action.payload.user_id,
@@ -125,8 +124,7 @@ export function sendMessage (state, action) {
             created_at: Date.now(),
             send_pending: true,
             send_failed: false
-          },
-          ...chatHead.chatMessages
+          }
         ]
       };
     })

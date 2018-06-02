@@ -8,5 +8,9 @@ export default [
   {
     event: 'seenChatMessages',
     handler: Chat.seenMessages
+  },
+  {
+    event: 'iAmTyping',
+    handler: Chat.iAmTyping
   }
 ];

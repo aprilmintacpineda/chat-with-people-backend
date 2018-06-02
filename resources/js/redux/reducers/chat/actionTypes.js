@@ -10,5 +10,6 @@ export default {
   sendMessageFailed: 'ChatMessageSendFailed',
   receivedMessage: 'ChatMessageReceived',
   seenMessages: 'ChatMessagesSeen',
+  otherUserIsTyping: 'chatOtherUserIsTyping',
   openedMessages: 'ChatMessagesOpened'
 };

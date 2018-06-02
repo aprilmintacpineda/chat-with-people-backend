@@ -11,7 +11,7 @@ import {
   seenMessages,
   openedMessages
 } from './chatMessages';
-import { toggleChatBody } from './chatBody';
+import { toggleChatBody, otherUserIsTyping } from './chatBody';
 
 export default {
   [actionTypes.createChatHead]: createChatHead,
@@ -25,5 +25,6 @@ export default {
   [actionTypes.sendMessageFailed]: sendMessageFailed,
   [actionTypes.receivedMessage]: receivedMessage,
   [actionTypes.seenMessages]: seenMessages,
+  [actionTypes.otherUserIsTyping]: otherUserIsTyping,
   [actionTypes.openedMessages]: openedMessages
 };

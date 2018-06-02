@@ -2,18 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TimeAgoJS from 'timeago.js';
-import Icon from './Icon';
-import InputText from './forms/InputText';
-import UnexpectedError from './UnexpectedError';
-import { generateUID } from '../Utils';
-import chatActions from '../redux/reducers/chat/actions';
+import Icon from '../Icon';
+import InputText from '../forms/InputText';
+import UnexpectedError from '../UnexpectedError';
+import { generateUID } from '../../Utils';
+import ChatBody from './ChatBody';
+import chatActions from '../../redux/reducers/chat/actions';
 
 class ChatHeads extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.chatInputFields = {};
+    this.chatBodies = {};
+  }
+
   componentDidMount () {
     this.watchSocketEvents();
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, nextProps) {
     this.props.chatState.chatHeads.forEach((chatHead, i) => {
       if (chatHead.shouldCheckMessages && !chatHead.request.pending) {
         this.props.checkMessages({
@@ -25,16 +33,7 @@ class ChatHeads extends React.Component {
 
       if (chatHead.open
         && (!prevProps.chatState.chatHeads[i] || !prevProps.chatState.chatHeads[i].open)) {
-        this.props.sessionState.socket.emit('seenChatMessages', {
-          user_id: chatHead.user.user_id,
-          token: localStorage.getItem('token')
-        });
-
-        this.props.openedMessages({
-          payload: {
-            user_id: chatHead.user.user_id
-          }
-        });
+        this.seenMessage(chatHead);
       }
     });
   }
@@ -45,26 +44,54 @@ class ChatHeads extends React.Component {
     this.props.sessionState.socket.on('sendChatMessageSuccessful', payload => this.props.sendMessageSuccessful({
       payload
     }));
+
+    this.props.sessionState.socket.on('otherUserIsTyping', payload => this.props.otherUserIsTyping({
+      payload
+    }));
   }
 
-  sendMessage = (message, user_id) => {
-    const token = localStorage.getItem('token');
+  iAmTyping = (chatHead, typing) => {
+    this.props.sessionState.socket.emit('iAmTyping', {
+      user_id: chatHead.user.user_id,
+      typing,
+      token: localStorage.getItem('token')
+    });
+  }
+
+  seenMessage = chatHead => {
+    this.props.sessionState.socket.emit('seenChatMessages', {
+      user_id: chatHead.user.user_id,
+      token: localStorage.getItem('token')
+    });
+
+    this.props.openedMessages({
+      payload: {
+        user_id: chatHead.user.user_id
+      }
+    });
+  }
+
+  sendMessage = (chatHead) => {
+    this.chatBodies[chatHead.user.user_id].scrollChatBodyToBottom();
+
+    this.iAmTyping(chatHead, false);
+
     const temp_id = generateUID(20);
 
     this.props.sendMessage({
       payload: {
-        message,
-        temp_id,
-        user_id
+        message: chatHead.message,
+        user_id: chatHead.user.user_id,
+        temp_id
       }
     });
 
     this.props.sessionState.socket.emit('sendChatMessage', {
-      message,
-      user_id,
-      temp_id,
-      token,
-      user: { ...this.props.sessionState.user }
+      message: chatHead.message,
+      user_id: chatHead.user.user_id,
+      token: localStorage.getItem('token'),
+      user: { ...this.props.sessionState.user },
+      temp_id
     });
   }
 
@@ -146,27 +173,40 @@ class ChatHeads extends React.Component {
     }
 
     return (
-      <div className="body-container">
-        <div className="chat-messages-container">
-          {messages}
-        </div>
+      <div className="body-container" onClick={() => this.chatInputFields[chatHead.user.user_id].focus()}>
+        <ChatBody
+          ref={o => this.chatBodies[chatHead.user.user_id] = o}
+          messages={messages}
+          typing={chatHead.typing}
+          onScroll={() => this.chatInputFields[chatHead.user.user_id].focus()}
+          username={chatHead.user.username}
+        />
         <div className="input-message">
           <div className="input" title="Type your message here">
             <InputText
+              ref={o => this.chatInputFields[chatHead.user.user_id] = o}
+              callOnFocusIfFocused={true}
+              onFocus={() => this.seenMessage(chatHead)}
               placeholder="Enter : message. Shift + Enter : new line"
               value={chatHead.message}
               multiline={true}
               shouldBreakLine={event => event.shiftKey}
-              onEnterKeyPress={() => this.sendMessage(chatHead.message, chatHead.user.user_id)}
-              onChange={({ value }) => this.props.editMessage({
-                payload: {
-                  value,
-                  user_id: chatHead.user.user_id
-                }
-              })}
+              onEnterKeyPress={() => {
+                this.sendMessage(chatHead);
+              }}
+              onChange={({ value }) => {
+                this.props.editMessage({
+                  payload: {
+                    value,
+                    user_id: chatHead.user.user_id
+                  }
+                });
+
+                this.iAmTyping(chatHead, value.length > 0);
+              }}
             />
           </div>
-          <a onClick={() => this.sendMessage(chatHead.message, chatHead.user.user_id)} className="send" title="Click to send your message"><Icon name="send" /></a>
+          <a onClick={() => this.sendMessage(chatHead)} className="send" title="Click to send your message"><Icon name="send" /></a>
         </div>
       </div>
     );

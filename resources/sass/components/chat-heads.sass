@@ -78,11 +78,16 @@
       min-height: 0
       .chat-messages-container
         display: flex
-        flex-direction: column-reverse
+        flex-direction: column
         flex: 7
         overflow-x: hidden
         overflow-y: auto
         padding-top: 10px
+        .is-typing
+          color: gray
+          padding-top: 10px
+          margin: 10px
+          border-top: 1px solid rgba(128, 128, 128, 0.1)
         p
           display: inline-block
         .pending
