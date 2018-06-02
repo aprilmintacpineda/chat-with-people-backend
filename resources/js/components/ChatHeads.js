@@ -166,7 +166,7 @@ class ChatHeads extends React.Component {
               })}
             />
           </div>
-          <a className="send" title="Click to send your message"><Icon name="send" /></a>
+          <a onClick={() => this.sendMessage(chatHead.message, chatHead.user.user_id)} className="send" title="Click to send your message"><Icon name="send" /></a>
         </div>
       </div>
     );

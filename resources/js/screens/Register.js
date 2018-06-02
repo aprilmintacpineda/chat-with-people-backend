@@ -74,11 +74,11 @@ class Register extends React.Component {
                 onChange={username => this.props.editUsername({
                   payload: { username }
                 })}
-                validationRules="required|notRegex:/^(?![0-9_])[a-zA-Z0-9_]+(?<![_])$/|betweenLen:8,20"
+                validationRules="required|notRegex:/^(?![0-9])[a-zA-Z0-9]+$/|betweenLen:8,20"
                 validationMessages={{
                   required: 'Please enter your desired username.',
                   betweenLen: 'Your username must be 8 to 20 characters long.',
-                  notRegex: 'Your username must be composed of alphabets, numbers, and underscores. It must begin and end with an alphabet.'
+                  notRegex: 'Your username must be composed of alphabets and numbers and must begin an alphabet.'
                 }}
                 disabled={this.props.registerState.request.pending}
               />
