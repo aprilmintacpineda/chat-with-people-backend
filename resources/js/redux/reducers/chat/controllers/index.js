@@ -1,5 +1,10 @@
 import actionTypes from '../actionTypes';
-import { createChatHead, removeChatHead } from './chatHeads';
+import {
+  createChatHead,
+  removeChatHead,
+  fetchOlderMessages,
+  fetchedOlderMessages
+} from './chatHeads';
 import {
   checkMessages,
   checkedMessages,
@@ -25,6 +30,8 @@ export default {
   [actionTypes.sendMessageFailed]: sendMessageFailed,
   [actionTypes.receivedMessage]: receivedMessage,
   [actionTypes.seenMessages]: seenMessages,
-  [actionTypes.otherUserIsTyping]: otherUserIsTyping,
-  [actionTypes.openedMessages]: openedMessages
+  [actionTypes.openedMessages]: openedMessages,
+  [actionTypes.fetchOlderMessages]: fetchOlderMessages,
+  [actionTypes.fetchedOlderMessages]: fetchedOlderMessages,
+  [actionTypes.otherUserIsTyping]: otherUserIsTyping
 };

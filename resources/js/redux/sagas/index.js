@@ -5,6 +5,7 @@ import search from './search';
 import verifyEmail from './verifyEmail';
 import getSession from './session/getSession';
 import createChatHead from './chat/createChatHead';
+import fetchOlderMessages from './chat/fetchOlderMessages';
 
 export default function* () {
   yield all([
@@ -13,6 +14,7 @@ export default function* () {
     login(),
     getSession(),
     search(),
-    createChatHead()
+    createChatHead(),
+    fetchOlderMessages()
   ]);
 }

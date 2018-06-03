@@ -137,7 +137,7 @@ class ChatHeads extends React.Component {
               <Icon name="loading" /> Sending...
             </span>
           );
-        } else if (!message.seen_at) {
+        } else if (!message.seen_at || chatHead.user.user_id == this.props.sessionState.user.user_id) {
           seenAgo = `${timeLapsed}`;
         } else {
           timeLapsed = timeAgo.format(
@@ -164,14 +164,6 @@ class ChatHeads extends React.Component {
       );
     }) : <div className="loading"><p>There are no messages here.</p></div>;
 
-    if (chatHead.chatMessages.length && chatHead.request.pending) {
-      messages.push(
-        <div key="loading-old-messages" className="loading-old-messages">
-          <Icon name="loading" /> Loading older messages...
-        </div>
-      );
-    }
-
     return (
       <div className="body-container" onClick={() => this.chatInputFields[chatHead.user.user_id].focus()}>
         <ChatBody
@@ -179,7 +171,8 @@ class ChatHeads extends React.Component {
           messages={messages}
           typing={chatHead.typing}
           onScroll={() => this.chatInputFields[chatHead.user.user_id].focus()}
-          username={chatHead.user.username}
+          chatHead={chatHead}
+          fetchOlderMessages={this.props.fetchOlderMessages}
         />
         <div className="input-message">
           <div className="input" title="Type your message here">

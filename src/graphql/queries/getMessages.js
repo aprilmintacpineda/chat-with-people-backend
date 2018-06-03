@@ -21,18 +21,11 @@ export default {
 
       Promise.all([
         sequelize.query(`
-          select * from (
-            select * from private_chat
-            where (
-              (
-                (sender_user_id = :user_id and receiver_user_id = :other_user_id) or
-                (sender_user_id = :other_user_id and receiver_user_id = :user_id)
-              ) and
-              created_at >= (UNIX_TIMESTAMP() - 3600 * 24 * 5) * 1000
-            )
-            order by created_at desc
-            limit ${offset}, ${limit}
-          ) as private_chat order by created_at asc
+          select * from private_chat
+          where (sender_user_id = :user_id and receiver_user_id = :other_user_id) or
+            (sender_user_id = :other_user_id and receiver_user_id = :user_id)
+          order by created_at desc
+          limit ${offset}, ${limit}
         `, {
           replacements: {
             user_id: userData.user_id,

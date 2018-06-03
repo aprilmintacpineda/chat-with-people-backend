@@ -7,6 +7,7 @@ export function checkMessages (state, action) {
       return {
         ...chatHead,
         request: {
+          ...chatHead.request,
           pending: true,
           error: false
         }
@@ -28,6 +29,7 @@ export function checkedMessages (state, action) {
         : null,
         shouldCheckMessages: false,
         request: {
+          ...chatHead.request,
           pending: false,
           error: !action.payload.chatMessages? true : false
         }
@@ -96,7 +98,11 @@ export function receivedMessage (state, action) {
           message: '',
           request: {
             pending: false,
-            error: false
+            error: false,
+            olderMessages: {
+              pending: false,
+              error: false
+            }
           }
         }
       ]
@@ -197,7 +203,9 @@ export function seenMessages (state, action) {
   return {
     ...state,
     chatHeads: state.chatHeads.map(chatHead => {
-      if (chatHead.user.user_id != action.payload.user_id) return { ...chatHead };
+      if (chatHead.user.user_id != action.payload.user_id || !chatHead.chatMessages) {
+        return { ...chatHead };
+      }
 
       return {
         ...chatHead,
